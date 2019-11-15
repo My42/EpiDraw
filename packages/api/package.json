@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "ts-node-dev src/app.ts"
+  },
   "name": "EpiDraw-API",
   "version": "1.0.0",
   "description": "This is EpiDraw's API",
@@ -8,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "ts-node": "^8.5.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.2"
   }
 }
