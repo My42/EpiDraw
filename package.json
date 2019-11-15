@@ -1,7 +1,9 @@
 {
+  "start": "lerna exec yarn start --scope api & lern",
   "name": "root",
   "private": true,
   "devDependencies": {
+    "concurrently": "^5.0.0",
     "lerna": "^3.16.4"
   }
 }
