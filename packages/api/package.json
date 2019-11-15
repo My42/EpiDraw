@@ -1,0 +1,9 @@
+{
+  "name": "EpiDraw-API",
+  "version": "1.0.0",
+  "description": "This is EpiDraw's API",
+  "main": "app.js",
+  "repository": "git@github.com:My42/EpiDraw.git",
+  "author": "Vincent Mesquita",
+  "license": "MIT"
+}
