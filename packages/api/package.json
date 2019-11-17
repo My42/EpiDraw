@@ -1,7 +1,8 @@
 {
   "scripts": {
+    "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node-dev --respawn --transpileOnly src/app.ts",
-    "lint": "eslint ./src/**/* --ext .ts"
+    "test": "mocha --require ts-node/register 'src/**/___test___/*.spec.ts'"
   },
   "name": "EpiDraw-API",
   "version": "1.0.0",
