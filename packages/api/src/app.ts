@@ -6,7 +6,8 @@ import {
 } from 'apollo-server'
 import authSchema from './services/auth/graphQL'
 
-mongoose.connect('mongodb://localhost:27017/EpiDraw', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/EpiDraw',
+  { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     const server = new ApolloServer({
       playground: true,
