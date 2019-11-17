@@ -1,4 +1,5 @@
 import { Schema, model, models } from 'mongoose'
+import { UserDocument } from '../types/user'
 
 export const name = 'Users'
 
@@ -13,6 +14,6 @@ schema.path('email').validate(async (email) => {
   return !count
 }, 'Email already exist', 'EmailUniq')
 
-const users = model(name, schema)
+const users = model<UserDocument>(name, schema)
 
 export default users
