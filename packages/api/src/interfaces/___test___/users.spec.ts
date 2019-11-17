@@ -14,12 +14,12 @@ const newUser = createUser()
 describe('Users interface', () => {
   describe('Users.create', () => {
     test('Should create an user', async () => {
-      const res = userInterface.create({ ...newUser })
+      const res = await userInterface.create({ ...newUser })
 
       const user = await Users.findOne({ email: newUser.email, username: newUser.username })
 
       expect(user).to.not.be.equal(null)
-      expect(user).to.be.deep.equal(res)
+      expect(user.toObject()).to.be.deep.equal(res.toObject())
 
       const isItTheGoodPassword = await bcrypt.compare(newUser.password, user.password)
       expect(isItTheGoodPassword).to.be.equal(true)
@@ -35,7 +35,9 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.essage).to.be.equal("I don't know what I'm expecting here")
+      expect(error.message).to.be.equal('Users validation failed: email: Email already exist')
+      expect(error.errors.email.path).to.be.equal('email')
+      expect(error.errors.email.kind).to.be.equal('UNIQ_ARG')
     })
 
     test('Should thrown an error for invalid email', async () => {
@@ -51,7 +53,9 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.essage).to.be.equal("I don't know what I'm expecting here")
+      expect(error.message).to.be.equal('Users validation failed: email: Email is invalid')
+      expect(error.errors.email.path).to.be.equal('email')
+      expect(error.errors.email.kind).to.be.equal('INVALID_ARG')
     })
 
     test('Should thrown an error for invalid email', async () => {
@@ -67,7 +71,9 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.essage).to.be.equal("I don't know what I'm expecting here")
+      expect(error.message).to.be.equal('Users validation failed: email: Email is invalid')
+      expect(error.errors.email.path).to.be.equal('email')
+      expect(error.errors.email.kind).to.be.equal('INVALID_ARG')
     })
   })
 })

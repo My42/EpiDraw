@@ -7,9 +7,9 @@ export interface CreateArgs {
 }
 
 export default class Users {
-  BCRYPT_SALT_ROUNDS = 10
+  static BCRYPT_SALT_ROUNDS = 10
 
-  async create ({ email, password, username }: CreateArgs) {
-    // await UsersModel.create({ email, password, username })
+  create ({ email, password, username }: CreateArgs) {
+    return UsersModel.create({ email, password, username })
   }
 }
