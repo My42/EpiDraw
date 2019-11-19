@@ -1,3 +1,5 @@
+import { Types, Schema } from 'mongoose'
+
 import UsersModel from '../models/users'
 
 export interface CreateArgs {
@@ -6,10 +8,19 @@ export interface CreateArgs {
   username: string;
 }
 
+export interface DeleteArgs {
+  id: string
+}
+
 export default class Users {
   static BCRYPT_SALT_ROUNDS = 10
 
   create ({ email, password, username }: CreateArgs) {
     return UsersModel.create({ email, password, username })
+  }
+
+  delete ({ id }: DeleteArgs) {
+    console.log('id = ', id)
+    return UsersModel.deleteOne({ _id: id })
   }
 }
