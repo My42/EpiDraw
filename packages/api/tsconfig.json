@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@models/*": ["./src/models/*"],
+      "@myTypes/*": ["./src/types/*"],
+      "@services/*": ["./src/services/*"],
+      "@shared/*": ["../shared/*"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

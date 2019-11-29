@@ -1,9 +1,9 @@
 import * as bcrypt from 'bcrypt'
 import { Schema, model, models } from 'mongoose'
 
-import { UserDocument } from '../types/user'
-import { email as emailRegEx } from '../../../shared/regExes'
-import Users from '../interfaces/Users'
+import { UserDocument } from '@myTypes/user'
+import { email as emailRegEx } from '@shared/regExes'
+import Users from '@interfaces/Users'
 
 export const name = 'Users'
 

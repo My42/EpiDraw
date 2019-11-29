@@ -2,7 +2,7 @@
   "scripts": {
     "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node-dev --respawn --transpileOnly src/app.ts",
-    "test": "mocha --require ts-node/register 'src/**/___test___/*.spec.ts'"
+    "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/___test___/*.spec.ts'"
   },
   "name": "EpiDraw-API",
   "version": "1.0.0",
@@ -13,6 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.5",
+    "@types/expect": "^24.3.0",
     "@types/faker": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
@@ -26,8 +27,10 @@
     "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
     "mocha": "^6.2.2",
+    "ts-mocha": "^6.0.0",
     "ts-node": "^8.5.2",
     "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.2"
   },
   "dependencies": {
