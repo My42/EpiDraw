@@ -1,8 +1,11 @@
 {
   "scripts": {
+    "preinstall": "lerna bootstrap",
     "api": "lerna exec yarn start --scope api",
+    "api-test": "lerna exec yarn test --scope api",
     "client": "lerna exec yarn start --scope client",
-    "start": "concurrently 'npm:api' 'npm:client'"
+    "start": "concurrently 'yarn:api' 'yarn:client'",
+    "test": "concurrently 'yarn:api-test'"
   },
   "name": "root",
   "private": true,

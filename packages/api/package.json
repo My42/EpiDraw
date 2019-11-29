@@ -4,7 +4,7 @@
     "start": "ts-node-dev --respawn --transpileOnly src/app.ts",
     "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/___test___/*.spec.ts'"
   },
-  "name": "EpiDraw-API",
+  "name": "api",
   "version": "1.0.0",
   "description": "This is EpiDraw's API",
   "main": "app.js",
