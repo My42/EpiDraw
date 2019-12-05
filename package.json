@@ -1,16 +1,13 @@
 {
   "scripts": {
-    "preinstall": "lerna bootstrap",
     "api": "lerna exec yarn start --scope api",
     "api-test": "lerna exec yarn test --scope api",
-    "client": "lerna exec yarn start --scope client",
-    "start": "concurrently 'yarn:api' 'yarn:client'",
-    "test": "concurrently 'yarn:api-test'"
+    "start": "docker-compose -f docker-compose.yml up",
+    "test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit"
   },
   "name": "root",
   "private": true,
   "devDependencies": {
-    "concurrently": "^5.0.0",
-    "lerna": "^3.16.4"
+    "concurrently": "^5.0.0"
   }
 }
