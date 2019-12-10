@@ -11,5 +11,7 @@ jobs:
     steps:
       - checkout
 
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+
       # run tests!
       - run: docker-compose -f docker-compose.test.yml up --abort-on-container-exit
