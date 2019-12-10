@@ -5,16 +5,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:13.0.1
-      - image: circleci/mongo:latest
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
+    machine: true # Use a Linux VM instead of docker environment
     working_directory: ~/repo
 
     steps:
