@@ -11,6 +11,8 @@ jobs:
     steps:
       - checkout
 
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+
       # Download and cache dependencies
       - restore_cache:
           keys:
