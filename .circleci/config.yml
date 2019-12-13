@@ -34,6 +34,9 @@ jobs:
       - checkout
 
       # run tests!
-      - run: yarn install
+      - run: |
+          export NVM_DIR="/opt/circleci/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+          yarn install
       - run: yarn test
       - run: yarn lint
