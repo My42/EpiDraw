@@ -10,7 +10,6 @@ jobs:
     run:
 
     steps:
-      # - run: curl -o- -L https://yarnpkg.com/install.sh | bash
 
       - run: sudo apt-get install apt-transport-https
       - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -35,7 +34,6 @@ jobs:
 
       - checkout
 
-      # run tests!
       - run: |
           export NVM_DIR="/opt/circleci/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
