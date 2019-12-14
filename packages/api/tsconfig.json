@@ -4,12 +4,14 @@
     "target": "es5",
     "sourceMap": true,
     "baseUrl": ".",
+    "esModuleInterop": true,
     "paths": {
       "@interfaces/*": ["./src/interfaces/*"],
       "@models/*": ["./src/models/*"],
       "@myTypes/*": ["./src/types/*"],
       "@services/*": ["./src/services/*"],
-      "@shared/*": ["../shared/*"]
+      "@shared/*": ["../shared/*"],
+      "test/*": ["./test/*"]
     }
   },
   "exclude": [

@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+import { connect } from 'mongoose'
 
 import {
   ApolloServer,
@@ -6,7 +6,7 @@ import {
 } from 'apollo-server'
 import authSchema from './graphQL/Auth'
 
-mongoose.connect('mongodb://database:27017/EpiDraw',
+connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     const server = new ApolloServer({
