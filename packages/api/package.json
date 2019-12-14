@@ -2,7 +2,7 @@
   "scripts": {
     "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node-dev --respawn --transpileOnly src/app.ts",
-    "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/___test___/*.spec.ts'"
+    "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
   },
   "name": "api",
   "version": "1.0.0",

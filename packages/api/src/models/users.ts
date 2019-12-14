@@ -3,7 +3,7 @@ import { Schema, model, models } from 'mongoose'
 
 import { UserDocument } from '@myTypes/user'
 import { email as emailRegEx } from '@shared/regExes'
-import Users from '@interfaces/Users'
+import { Users } from '@interfaces/Users/Users'
 
 export const name = 'Users'
 

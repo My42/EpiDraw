@@ -10,7 +10,7 @@ export interface DeleteArgs {
   id: string
 }
 
-export default class Users {
+export class Users {
   static BCRYPT_SALT_ROUNDS = 10
 
   create ({ email, password, username }: CreateArgs) {
