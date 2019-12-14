@@ -4,7 +4,7 @@ import {
   ApolloServer,
   mergeSchemas
 } from 'apollo-server'
-import authSchema from './services/auth/graphQL'
+import authSchema from './graphQL/Auth'
 
 mongoose.connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })

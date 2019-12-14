@@ -2,10 +2,10 @@ import { expect } from 'chai'
 import * as bcrypt from 'bcrypt'
 import { after, before, describe, test } from 'mocha'
 
-import Users from '../../models/users'
+import Users from '@models/users'
 import { createUser } from '../../../test/fixtures'
 
-import UsersInterface from '../Users'
+import { Users as UsersInterface } from './Users'
 
 const userInterface = new UsersInterface()
 
