@@ -10,14 +10,33 @@ jobs:
     run:
 
     steps:
-      # - run: curl -o- -L https://yarnpkg.com/install.sh | bash
 
       - run: sudo apt-get install apt-transport-https
       - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
       - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
       - run: sudo apt-get update && sudo apt-get install yarn
 
+      - run:
+          name: Install  Node.js 8.9.1 with build in nvm tool
+          # https://www.cloudesire.com/how-to-upgrade-node-on-circleci-machine-executor/
+          command: |
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install v8.11.3 && nvm use v8.11.3 && nvm alias default v8.11.3
+            node -v
+
+      - run:
+          name: Check node version
+          command: |
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            node -v
+
       - checkout
 
-      # run tests!
-      - run: yarn test
+      - run: |
+          export NVM_DIR="/opt/circleci/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+          yarn install
+          yarn test
+          yarn lint

@@ -5,6 +5,7 @@ export interface SignUpArgs {
 }
 
 export default class Auth {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async signUp ({ email, password, username } : SignUpArgs) {
   }
 }
