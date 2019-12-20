@@ -35,10 +35,14 @@
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/lodash": "^4.14.149",
     "@types/mongoose": "^5.5.31",
+    "@types/sinon": "^7.5.1",
     "apollo-server": "^2.9.9",
     "bcrypt": "^3.0.6",
     "graphql": "^14.5.8",
-    "mongoose": "^5.7.11"
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.11",
+    "sinon": "^7.5.0"
   }
 }

@@ -16,6 +16,8 @@ services:
       - ./packages/api/tsconfig.json:/usr/app/src/tsconfig.json
       - ./packages/api/node_modules:/usr/app/src/node_modules
       - ./packages/api/yarn.lock:/usr/app/src/yarn.lock
+      - ./packages/api/test:/usr/app/src/test
+      - ./packages/shared:/usr/app/shared
   database:
     image: mongo
     container_name: 'epidraw-db'

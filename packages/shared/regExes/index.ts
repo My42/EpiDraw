@@ -1,3 +1,3 @@
-import email from './email'
-
-export { email }
+export { email } from './email'
+export { password } from './password'
+export { username } from './username'
