@@ -1,6 +1,6 @@
 import { Document, Types, Schema } from 'mongoose'
 
-export default interface User {
+export interface User {
   id: Schema.Types.ObjectId;
   email: string;
   username: string;

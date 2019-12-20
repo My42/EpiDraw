@@ -1,9 +1,9 @@
 import { internet } from 'faker'
 import { Types } from 'mongoose'
 
-import User from '../../src/types/user'
+import { User } from 'myTypes/user'
 
-import { DeepPartial } from '../../src/types/utils'
+import { DeepPartial } from 'myTypes/utils'
 
 const createUser = (user: DeepPartial<User> = { }) => {
   const id = Types.ObjectId()

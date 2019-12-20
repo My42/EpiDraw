@@ -4,12 +4,14 @@ import {
   ApolloServer,
   mergeSchemas
 } from 'apollo-server'
+import { createContext } from './graphQL/utils'
 import authSchema from './graphQL/Auth'
 
 connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     const server = new ApolloServer({
+      context: createContext,
       playground: true,
       schema: mergeSchemas({ schemas: [authSchema] })
     })
