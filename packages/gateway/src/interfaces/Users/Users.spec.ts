@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import * as bcrypt from 'bcrypt'
-import { after, before, describe, test } from 'mocha'
-
+import { after, before, describe, it } from 'mocha'
 import Users from '@/models/users'
+
 import { createUser } from '@test/fixtures'
 
 import { Users as UsersInterface } from './Users'
@@ -21,7 +21,7 @@ describe('Users interface', () => {
   })
 
   describe('Users.create', () => {
-    test('Should create an user', async () => {
+    it('Should create an user', async () => {
       const u = createUser()
       const res = await userInterface.create({ ...u })
 
@@ -34,7 +34,7 @@ describe('Users interface', () => {
       expect(isItTheGoodPassword).to.be.equal(true)
     })
 
-    test('Should thrown an error for uniq email', async () => {
+    it('Should thrown an error for uniq email', async () => {
       let error = null
 
       try {
@@ -49,7 +49,7 @@ describe('Users interface', () => {
       expect(error.errors.email.kind).to.be.equal('UNIQ_ARG')
     })
 
-    test('Should thrown an error for invalid email', async () => {
+    it('Should thrown an error for invalid email', async () => {
       let error = null
 
       try {
@@ -67,7 +67,7 @@ describe('Users interface', () => {
       expect(error.errors.email.kind).to.be.equal('INVALID_ARG')
     })
 
-    test('Should thrown an error for invalid email', async () => {
+    it('Should thrown an error for invalid email', async () => {
       let error = null
 
       try {
@@ -86,8 +86,23 @@ describe('Users interface', () => {
     })
   })
 
+  describe('User.findOne', () => {
+    it('should find one user', async () => {
+      const user = await userInterface.findOne({ _id: newUser._id })
+
+      expect(user).to.be.not.equal(null)
+      expect(user._id).to.be.deep.equal(newUser._id)
+    })
+
+    it('should find no user', async () => {
+      const user = await userInterface.findOne({ _id: newUser._id })
+
+      expect(user).to.be.equal(null)
+    })
+  })
+
   describe('User.delete', () => {
-    test('should delete the user', async () => {
+    it('should delete the user', async () => {
       await userInterface.delete({ id: newUser.id.toString() })
 
       const user = await Users.findOne({ id: newUser.id.toString() })
@@ -95,7 +110,7 @@ describe('Users interface', () => {
       expect(user).to.be.equal(null)
     })
 
-    test('should happen nothing', async () => {
+    it('should happen nothing', async () => {
       let error = null
       try {
         await userInterface.delete({ id: newUser.id.toString() })

@@ -15,7 +15,6 @@ services:
       - ./packages/gateway/package.json:/usr/app/src/package.json
       - ./packages/gateway/tsconfig.json:/usr/app/src/tsconfig.json
       - ./packages/gateway/node_modules:/usr/app/src/node_modules
-      - ./packages/gateway/yarn.lock:/usr/app/src/yarn.lock
       - ./packages/gateway/test:/usr/app/src/test
       - ./packages/shared:/usr/app/shared
   database:
