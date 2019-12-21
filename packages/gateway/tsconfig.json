@@ -8,7 +8,7 @@
     "paths": {
       "@interfaces/*": ["./src/interfaces/*"],
       "@models/*": ["./src/models/*"],
-      "myTypes/*": ["./src/types/*"],
+      "@myTypes/*": ["./src/types/*"],
       "@services/*": ["./src/services/*"],
       "@shared/*": ["../shared/*"],
       "test/*": ["./test/*"]

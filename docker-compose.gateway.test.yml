@@ -2,8 +2,8 @@ version: '3'
 services:
   gateway:
     build: ./packages/gateway/
-    container_name: 'epidraw-gateway'
-    command: bash -c 'yarn install && yarn start'
+    container_name: 'epidraw-gateway-test'
+    command: bash -c 'yarn install && yarn test'
     depends_on:
       - database
     links:
@@ -23,3 +23,5 @@ services:
     container_name: 'epidraw-db'
     ports:
       - '27017-27019:27017-27019'
+    logging:
+      driver: none

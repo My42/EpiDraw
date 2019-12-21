@@ -6,7 +6,7 @@ import pick from 'lodash/pick'
 import { createUser } from 'test/fixtures'
 
 import { Auth as AuthService } from './Auth'
-import { Users as UsersInterface } from '@interfaces/index'
+import { Users as UsersInterface } from '@interfaces/Users'
 
 const createAuthService = (): {
   authInterfaceMocked: SinonStubbedInstance<UsersInterface>

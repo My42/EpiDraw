@@ -3,7 +3,7 @@ import {
   password as passwordRegEx,
   username as usernameRegEx
 } from '@shared/regExes'
-import { Users } from '@interfaces/index'
+import { Users } from '@interfaces/Users'
 import { EpiDrawError, errors } from '@shared/errors'
 
 export interface SignUpArgs {
