@@ -1,6 +1,6 @@
-import { Auth } from '@services/auth'
-import { Users } from '@interfaces/Users'
-import { Context } from '@myTypes/Context'
+import { Auth } from '@/services/auth'
+import { Users } from '@/interfaces/Users'
+import { Context } from '@/types/Context'
 
 export const createContext = (): Context => ({
   services: {

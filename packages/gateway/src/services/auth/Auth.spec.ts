@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import sinon, { SinonStubbedInstance } from 'sinon'
 import pick from 'lodash/pick'
 
-import { createUser } from 'test/fixtures'
+import { createUser } from '@test/fixtures'
 
 import { Auth as AuthService } from './Auth'
-import { Users as UsersInterface } from '@interfaces/Users'
+import { Users as UsersInterface } from '@/interfaces'
 
 const createAuthService = (): {
   authInterfaceMocked: SinonStubbedInstance<UsersInterface>

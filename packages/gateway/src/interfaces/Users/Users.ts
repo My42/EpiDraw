@@ -1,4 +1,4 @@
-import UsersModel from '@models/users'
+import UsersModel from '@/models/users'
 
 export interface CreateArgs {
   email: string;

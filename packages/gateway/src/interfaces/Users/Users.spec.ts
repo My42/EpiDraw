@@ -2,8 +2,8 @@ import { expect } from 'chai'
 import * as bcrypt from 'bcrypt'
 import { after, before, describe, test } from 'mocha'
 
-import Users from '@models/users'
-import { createUser } from '../../../test/fixtures'
+import Users from '@/models/users'
+import { createUser } from '@test/fixtures'
 
 import { Users as UsersInterface } from './Users'
 

@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2017",
     "sourceMap": true,
     "baseUrl": ".",
     "esModuleInterop": true,
     "paths": {
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@models/*": ["./src/models/*"],
-      "@myTypes/*": ["./src/types/*"],
-      "@services/*": ["./src/services/*"],
+      "@/*": ["./src/*"],
       "@shared/*": ["../shared/*"],
-      "test/*": ["./test/*"]
+      "@test/*": ["./test/*"]
     }
   },
   "exclude": [
