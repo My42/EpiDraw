@@ -1,6 +1,7 @@
-import { expect } from 'chai'
-import * as bcrypt from 'bcrypt'
 import { after, before, describe, it } from 'mocha'
+import { expect } from 'chai'
+import { Types } from "mongoose";
+import * as bcrypt from 'bcrypt'
 import Users from '@/models/users'
 
 import { createUser } from '@test/fixtures'
@@ -95,7 +96,7 @@ describe('Users interface', () => {
     })
 
     it('should find no user', async () => {
-      const user = await userInterface.findOne({ _id: newUser._id })
+      const user = await userInterface.findOne({ _id: Types.ObjectId() })
 
       expect(user).to.be.equal(null)
     })

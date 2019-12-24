@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "gateway.lint": "lerna exec npm run lint --scope gateway",
-    "gateway.test": "docker-compose -f docker-compose.gateway.test.yml up --abort-on-container-exit",
-    "lint": "concurrently 'npm:gateway.lint'",
+    "auth.lint": "lerna exec npm run lint --scope auth",
+    "auth.test": "docker-compose -f docker-compose.auth.test.yml up --abort-on-container-exit",
+    "lint": "concurrently 'npm:auth.lint'",
     "start": "docker-compose -f docker-compose.yml up",
-    "test": "concurrently 'npm:gateway.test'"
+    "test": "concurrently 'npm:auth.test'"
   },
   "name": "root",
   "private": true,
