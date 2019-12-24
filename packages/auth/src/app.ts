@@ -1,9 +1,5 @@
 import { connect } from 'mongoose'
 
-import { Users } from '@/interfaces'
-
-console.log(Users)
-
 import {
   ApolloServer,
   mergeSchemas
