@@ -1,4 +1,4 @@
-import UsersModel from '@/models/users'
+import UsersModel from '@shared/models/users'
 import { UserMongo } from '@/types/user'
 
 export interface CreateArgs {

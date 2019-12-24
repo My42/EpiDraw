@@ -2,7 +2,7 @@ import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
 import { Types } from 'mongoose'
 import * as bcrypt from 'bcrypt'
-import Users from '@/models/users'
+import Users from '@shared/models/users'
 
 import { createUser } from '@test/fixtures'
 
