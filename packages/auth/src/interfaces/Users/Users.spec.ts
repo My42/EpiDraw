@@ -1,6 +1,6 @@
 import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
-import { Types } from "mongoose";
+import { Types } from 'mongoose'
 import * as bcrypt from 'bcrypt'
 import Users from '@/models/users'
 
