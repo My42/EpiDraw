@@ -1,6 +1,6 @@
 import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
-import { Types } from 'mongoose'
+import { Types } from '@shared/utils/db'
 import * as bcrypt from 'bcrypt'
 import Users from '@shared/models/users'
 
@@ -14,7 +14,9 @@ const newUser = createUser()
 
 describe('Users interface', () => {
   before(async () => {
+    console.log('avant before')
     await Users.create(newUser)
+    console.log('apres before')
   })
 
   after(async () => {

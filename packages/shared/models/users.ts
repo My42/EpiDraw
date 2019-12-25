@@ -1,9 +1,10 @@
-import * as bcrypt from 'bcrypt'
+import { hash } from 'bcrypt'
 import { Schema, model, models } from 'mongoose'
 
-import { UserDocument } from '@/types/user'
-import { email as emailRegEx } from '@shared/regExes'
-import { Users } from '@/interfaces/Users/Users'
+import { UserDocument } from '../types'
+import { email as emailRegEx } from '../regExes'
+
+export const BCRYPT_SALT_ROUNDS = 10
 
 export const name = 'Users'
 
@@ -18,7 +19,7 @@ schema.pre('save', async function (next) {
 
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next()
-  user.password = await bcrypt.hash(user.password, Users.BCRYPT_SALT_ROUNDS)
+  user.password = await hash(user.password, BCRYPT_SALT_ROUNDS)
   next()
 })
 

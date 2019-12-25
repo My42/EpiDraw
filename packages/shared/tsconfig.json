@@ -1,14 +1,10 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@shared/*": ["../shared/*"],
       "@test/*": ["./test/*"]
     }
-  },
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }

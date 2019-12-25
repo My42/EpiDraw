@@ -1,5 +1,5 @@
 import { after, before } from 'mocha'
-import { connect, connection, disconnect } from 'mongoose'
+import { connect, connection, disconnect } from '@shared/utils/db'
 
 before(async () => {
   console.log('BEFORE')

@@ -17,6 +17,7 @@ services:
       - ./packages/auth/node_modules:/usr/app/src/node_modules
       - ./packages/auth/test:/usr/app/src/test
       - ./packages/shared:/usr/app/shared
+      - ./tsconfig.json:/usr/tsconfig.json
   database:
     image: mongo
     container_name: 'epidraw-db'

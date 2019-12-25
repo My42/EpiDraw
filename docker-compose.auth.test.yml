@@ -3,7 +3,7 @@ services:
   auth:
     build: ./packages/auth/
     container_name: 'epidraw-auth-test'
-    command: bash -c 'yarn install && yarn test'
+    command: bash -c 'cd ../shared && yarn install && cd - && yarn install && yarn test'
     depends_on:
       - database
     links:
@@ -17,10 +17,9 @@ services:
       - ./packages/auth/node_modules:/usr/app/src/node_modules
       - ./packages/auth/test:/usr/app/src/test
       - ./packages/shared:/usr/app/shared
+      - ./tsconfig.json:/usr/tsconfig.json
   database:
     image: mongo
     container_name: 'epidraw-db'
     ports:
       - '27017-27019:27017-27019'
-    logging:
-      driver: none

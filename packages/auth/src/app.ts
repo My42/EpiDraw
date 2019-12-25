@@ -1,4 +1,6 @@
-import { connect } from 'mongoose'
+import { connect } from '@shared/utils/db'
+
+import Users from '@shared/models/users'
 
 import {
   ApolloServer,
@@ -10,6 +12,7 @@ import authSchema from './graphQL/Auth'
 connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
+    await Users.create({ email: 'dsds@free.fr', username: 'vfsdfd', password: 'dqsdqsdqsdq' })
     const server = new ApolloServer({
       context: createContext,
       playground: true,
