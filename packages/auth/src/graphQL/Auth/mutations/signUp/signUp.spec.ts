@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import pick from 'lodash/pick'
 import sinon from 'sinon'
 
-import { Auth } from '@/service/auth'
+import { Auth } from '@/service'
 
 import signUp from './signUp'
 import { createUser } from '@test/fixtures'
