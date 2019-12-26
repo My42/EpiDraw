@@ -1,4 +1,6 @@
-import { Auth } from '@/service/auth'
+import { Auth } from '@/service'
+
+dfdsfds
 
 export interface Context {
   services: {

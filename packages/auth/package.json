@@ -1,13 +1,14 @@
 {
   "scripts": {
+    "dev": "nodemon --config ./nodemon.json",
     "lint": "eslint ./src/**/* --ext .ts",
-    "start": "ts-node-dev --project tsconfig.json -r tsconfig-paths/register --respawn --transpileOnly src/app.ts",
+    "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
   },
   "name": "auth",
   "version": "1.0.0",
   "description": "This is EpiDraw's API",
-  "main": "app.js",
+  "main": "src/app.ts",
   "repository": "git@github.com:My42/EpiDraw.git",
   "author": "Vincent Mesquita",
   "license": "MIT",
@@ -28,8 +29,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
     "mocha": "^6.2.2",
+    "nodemon": "^2.0.2",
     "ts-mocha": "^6.0.0",
-    "ts-node": "^8.5.2",
+    "ts-node": "^8.5.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.2"

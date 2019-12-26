@@ -3,7 +3,7 @@ services:
   auth:
     build: ./packages/auth/
     container_name: 'epidraw-auth'
-    command: bash -c 'yarn install && yarn start'
+    command: bash -c 'cd ../shared && yarn install && cd - && yarn install && yarn dev'
     depends_on:
       - database
     links:
@@ -12,6 +12,7 @@ services:
       - '8081:8081'
     volumes:
       - ./packages/auth/src:/usr/app/src/src
+      - ./packages/auth/nodemon.json:/usr/app/src/nodemon.json
       - ./packages/auth/package.json:/usr/app/src/package.json
       - ./packages/auth/tsconfig.json:/usr/app/src/tsconfig.json
       - ./packages/auth/node_modules:/usr/app/src/node_modules
