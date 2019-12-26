@@ -31,10 +31,13 @@ describe('[Service] Auth.signUp', () => {
     const user = createUser()
     const { authInterfaceMocked, authService } = createAuthService()
 
-    await authService.signUp({ email: user.email, username: user.username, password: user.password })
+    authInterfaceMocked.create.resolves(user)
+
+    const result = await authService.signUp({ email: user.email, username: user.username, password: user.password })
 
     expect(authInterfaceMocked.create.callCount).to.be.equal(1)
     expect(authInterfaceMocked.create.getCall(0).args[0]).to.be.deep.equal(pick(user, ['email', 'username', 'password']))
+    expect(result).to.be.deep.equal({ email: user.email, username: user.username })
   })
 
   test('Invalid email', async () => {

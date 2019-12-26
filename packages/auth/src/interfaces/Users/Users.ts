@@ -1,5 +1,6 @@
 import UsersModel from '@shared/models/users'
-import { UserMongo } from '@/types/user'
+import { UserMongo } from '@shared/types/user'
+import { EpiDrawError, errors } from '@shared/errors'
 
 export interface CreateArgs {
   email: string;
@@ -12,10 +13,15 @@ export interface DeleteArgs {
 }
 
 export class Users {
-  static BCRYPT_SALT_ROUNDS = 10
-
-  create ({ email, password, username }: CreateArgs) {
-    return UsersModel.create({ email, password, username })
+  async create ({ email, password, username }: CreateArgs) {
+    try {
+      return await UsersModel.create({ email, password, username }) as unknown as UserMongo
+    } catch (e) {
+      if (e && e.errors && e.errors.email && e.errors.email.kind === 'UNIQ_ARG') {
+        throw new EpiDrawError(errors.EMAIL_ALREADY_EXIST, 'user.error.uniq.email')
+      }
+      throw e
+    }
   }
 
   findOne (filter: Partial<UserMongo>) {

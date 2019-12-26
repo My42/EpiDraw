@@ -1,11 +1,11 @@
 import { internet } from 'faker'
 import { Types } from '@shared/utils/db'
 
-import { User } from '@shared/types/user'
+import {User, UserMongo} from '@shared/types/user'
 
 import { DeepPartial } from '@shared/types/utils'
 
-const createUser = (user: DeepPartial<User> = { }) => {
+const createUser = (user: DeepPartial<User> = { }): UserMongo => {
   const _id = Types.ObjectId()
   return {
     _id,

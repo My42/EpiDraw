@@ -1,3 +1,5 @@
+import pick from 'lodash/pick'
+
 import {
   email as emailRegEx,
   password as passwordRegEx,
@@ -19,11 +21,13 @@ export class Auth {
     this._usersInterface = usersInterface
   }
 
-  signUp ({ email, password, username } : SignUpArgs) {
+  async signUp ({ email = '', password = '', username = '' } : SignUpArgs) {
     if (!email.match(emailRegEx)) throw new EpiDrawError(errors.INVALID_INPUT, 'user.error.invalid.email')
     if (!password.match(passwordRegEx)) throw new EpiDrawError(errors.INVALID_INPUT, 'user.error.invalid.password')
     if (!username.match(usernameRegEx)) throw new EpiDrawError(errors.INVALID_INPUT, 'user.error.invalid.username')
 
-    return this._usersInterface.create({ email, password, username })
+    const newUser = await this._usersInterface.create({ email, password, username })
+
+    return pick(newUser, ['email', 'username'])
   }
 }

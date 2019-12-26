@@ -2,6 +2,8 @@ import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
 import { Types } from '@shared/utils/db'
 import * as bcrypt from 'bcrypt'
+
+import { errors } from '@shared/errors'
 import Users from '@shared/models/users'
 
 import { createUser } from '@test/fixtures'
@@ -47,9 +49,8 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.message).to.be.equal('Users validation failed: email: Email already exist')
-      expect(error.errors.email.path).to.be.equal('email')
-      expect(error.errors.email.kind).to.be.equal('UNIQ_ARG')
+      expect(error.message).to.be.equal('user.error.uniq.email')
+      expect(error.code).to.be.equal(errors.EMAIL_ALREADY_EXIST)
     })
 
     it('Should thrown an error for invalid email', async () => {
