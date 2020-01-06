@@ -1,10 +1,9 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@shared/*": ["../shared/*"],
-      "@test/*": ["./test/*"]
+      "@auth/*": ["../auth/src/*"]
     }
   }
 }

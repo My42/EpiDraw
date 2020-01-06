@@ -16,9 +16,7 @@ const newUser = createUser()
 
 describe('Users interface', () => {
   before(async () => {
-    console.log('avant before')
     await Users.create(newUser)
-    console.log('apres before')
   })
 
   after(async () => {
@@ -33,6 +31,7 @@ describe('Users interface', () => {
       const user = await Users.findOne({ email: u.email, username: u.username })
 
       expect(user).to.not.be.equal(null)
+      // @ts-ignore
       expect(user.toObject()).to.be.deep.equal(res.toObject())
 
       const isItTheGoodPassword = await bcrypt.compare(u.password, user.password)
