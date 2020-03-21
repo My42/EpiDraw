@@ -25,7 +25,7 @@ export class Users {
   }
 
   findOne (filter: Partial<UserMongo>) {
-    return UsersModel.findOne(filter) as unknown as UserMongo
+    return UsersModel.findOne(filter) as unknown as UserMongo | null
   }
 
   delete ({ id }: DeleteArgs) {

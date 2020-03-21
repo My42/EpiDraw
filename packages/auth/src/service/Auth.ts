@@ -8,17 +8,22 @@ import {
 import { Users } from '@/interfaces/Users'
 import { EpiDrawError, errors } from '@shared/errors'
 
-export interface SignUpArgs {
+interface SignUpArgs {
   email: string,
   password: string,
   username: string,
 }
 
+interface SignInArgs {
+  email: string,
+  password: string,
+}
+
 export class Auth {
-  private _usersInterface: Users
+  #usersInterface: Users
 
   constructor (usersInterface: Users) {
-    this._usersInterface = usersInterface
+    this.#usersInterface = usersInterface
   }
 
   async signUp ({ email = '', password = '', username = '' } : SignUpArgs) {
@@ -26,7 +31,7 @@ export class Auth {
     if (!password.match(passwordRegEx)) throw new EpiDrawError(errors.INVALID_INPUT, 'user.error.invalid.password')
     if (!username.match(usernameRegEx)) throw new EpiDrawError(errors.INVALID_INPUT, 'user.error.invalid.username')
 
-    const newUser = await this._usersInterface.create({ email, password, username })
+    const newUser = await this.#usersInterface.create({ email, password, username })
 
     return pick(newUser, ['id', 'email', 'username'])
   }

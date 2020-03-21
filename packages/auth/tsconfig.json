@@ -6,7 +6,8 @@
       "@/*": ["./src/*"],
       "@shared/*": ["../shared/*"],
       "@test/*": ["./test/*"]
-    }
+    },
+    "strictNullChecks": true
   },
   "exclude": [
     "node_modules"
