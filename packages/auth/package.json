@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon --config ./nodemon.json",
+    "dev": "nodemon -L --config ./nodemon.json",
     "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
@@ -8,7 +8,6 @@
   "name": "auth",
   "version": "1.0.0",
   "description": "This is EpiDraw's API",
-  "main": "src/app.ts",
   "repository": "git@github.com:My42/EpiDraw.git",
   "author": "Vincent Mesquita",
   "license": "MIT",

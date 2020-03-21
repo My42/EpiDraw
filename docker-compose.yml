@@ -3,13 +3,13 @@ services:
   auth:
     build: ./packages/auth/
     container_name: 'epidraw-auth'
-    command: bash -c 'cd ../shared && yarn install && cd - && yarn install && yarn dev'
+    command: bash -c 'cd ../shared && yarn install && cd - && yarn install && yarn run dev'
     depends_on:
       - database
     links:
       - database
     ports:
-      - '8081:8081'
+      - '8082:8082'
     volumes:
       - ./packages/auth/src:/usr/app/src/src
       - ./packages/auth/nodemon.json:/usr/app/src/nodemon.json
@@ -17,6 +17,27 @@ services:
       - ./packages/auth/tsconfig.json:/usr/app/src/tsconfig.json
       - ./packages/auth/node_modules:/usr/app/src/node_modules
       - ./packages/auth/test:/usr/app/src/test
+      - ./packages/shared:/usr/app/shared
+      - ./tsconfig.json:/usr/tsconfig.json
+  gateway:
+    build: ./packages/gateway/
+    container_name: 'epidraw-gateway'
+    command: bash -c 'cd ../shared && yarn install && cd - && yarn install && yarn run dev'
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - '8081:8081'
+    volumes:
+      - ./packages/gateway/src:/usr/app/src/src
+      - ./packages/gateway/nodemon.json:/usr/app/src/nodemon.json
+      - ./packages/gateway/package.json:/usr/app/src/package.json
+      - ./packages/gateway/tsconfig.json:/usr/app/src/tsconfig.json
+      - ./packages/gateway/utils:/usr/app/src/utils
+      - ./packages/gateway/node_modules:/usr/app/src/node_modules
+      - ./packages/gateway/test:/usr/app/src/test
+      - ./packages/auth:/usr/app/auth
       - ./packages/shared:/usr/app/shared
       - ./tsconfig.json:/usr/tsconfig.json
   database:

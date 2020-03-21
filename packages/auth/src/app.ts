@@ -33,28 +33,7 @@ connect('mongodb://database:27017/EpiDraw',
       }
     })
 
-    app.listen(8081, () => console.log(`🚀  Server ready on port '${8081}'`))
+    app.listen(8082, () => console.log(`🚀  Auth service ready on port '${8082}'`))
   })
   .catch(error => console.log(error))
 
-/* import {
-  ApolloServer,
-  mergeSchemas
-} from 'apollo-server'
-import { createContext } from './graphQL/utils'
-import authSchema from './graphQL/Auth'
-
-connect('mongodb://database:27017/EpiDraw',
-  { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(async () => {
-    const server = new ApolloServer({
-      context: createContext,
-      playground: true,
-      schema: mergeSchemas({ schemas: [authSchema] })
-    })
-    server.listen(4242)
-      .then(({ url }) => console.log(`🚀  Server ready at ${url}`))
-      .catch(err => console.log(err))
-  })
-  .catch(error => console.log(error))
-*/

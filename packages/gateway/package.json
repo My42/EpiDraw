@@ -1,6 +1,23 @@
 {
   "name": "gateway",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "src/app.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -L --config ./nodemon.json",
+    "start": "ts-node -r tsconfig-paths/register src/app.ts"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.15",
+    "chai": "^4.2.0",
+    "lodash": "^4.17.15",
+    "mocha": "^7.0.0",
+    "sinon": "^8.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.5.4",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4"
+  }
 }

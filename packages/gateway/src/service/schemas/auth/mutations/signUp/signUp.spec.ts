@@ -3,10 +3,10 @@ import { expect } from 'chai'
 import pick from 'lodash/pick'
 import sinon from 'sinon'
 
-import { Auth } from '@/service'
+import { Auth } from '@auth/service'
 
 import signUp from './signUp'
-import { createUser } from '@test/fixtures'
+import { createUser } from '../../../../../../../auth/test/fixtures'
 import { Context } from '@shared/types/Context'
 
 const user = createUser()
