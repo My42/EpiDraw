@@ -37,7 +37,7 @@ describe('[Service] Auth.signUp', () => {
 
     expect(authInterfaceMocked.create.callCount).to.be.equal(1)
     expect(authInterfaceMocked.create.getCall(0).args[0]).to.be.deep.equal(pick(user, ['email', 'username', 'password']))
-    expect(result).to.be.deep.equal({ email: user.email, username: user.username })
+    expect(result).to.be.deep.equal({ email: user.email, id: user.id, username: user.username })
   })
 
   test('Invalid email', async () => {
