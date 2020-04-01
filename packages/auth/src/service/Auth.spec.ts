@@ -6,6 +6,7 @@ import pick from 'lodash/pick'
 import { createUser } from '@test/fixtures'
 
 import { Auth as AuthService } from './Auth'
+import { EpiDrawError } from '@shared/errors'
 import { Users as UsersInterface } from '@/interfaces'
 
 const createAuthService = (): {
@@ -20,7 +21,7 @@ const createAuthService = (): {
 
 describe('[Service] Auth', () => {
   test('Instance', () => {
-    const authService = new AuthService(null)
+    const { authService } = createAuthService()
 
     expect(authService).to.be.an.instanceOf(AuthService)
   })
@@ -43,7 +44,7 @@ describe('[Service] Auth.signUp', () => {
   test('Invalid email', async () => {
     const user = createUser({ email: 'INVALID_EMAIL.com' })
     const { authInterfaceMocked, authService } = createAuthService()
-    let error = null
+    let error: EpiDrawError | null = null
 
     try {
       await authService.signUp({ email: user.email, username: user.username, password: user.password })
@@ -52,14 +53,14 @@ describe('[Service] Auth.signUp', () => {
     }
 
     expect(error).to.be.not.equal(null)
-    expect(error.message).to.be.equal('user.error.invalid.email')
+    expect(error!.message).to.be.equal('user.error.invalid.email')
     expect(authInterfaceMocked.create.callCount).to.be.equal(0)
   })
 
   test('Invalid username', async () => {
     const user = createUser({ username: 'a' })
     const { authInterfaceMocked, authService } = createAuthService()
-    let error = null
+    let error: EpiDrawError | null = null
 
     try {
       await authService.signUp({ email: user.email, username: user.username, password: user.password })
@@ -68,14 +69,14 @@ describe('[Service] Auth.signUp', () => {
     }
 
     expect(error).to.be.not.equal(null)
-    expect(error.message).to.be.equal('user.error.invalid.username')
+    expect(error!.message).to.be.equal('user.error.invalid.username')
     expect(authInterfaceMocked.create.callCount).to.be.equal(0)
   })
 
   test('Invalid password', async () => {
     const user = createUser({ password: '1234' })
     const { authInterfaceMocked, authService } = createAuthService()
-    let error = null
+    let error: EpiDrawError | null = null
 
     try {
       await authService.signUp({ email: user.email, username: user.username, password: user.password })
@@ -84,7 +85,7 @@ describe('[Service] Auth.signUp', () => {
     }
 
     expect(error).to.be.not.equal(null)
-    expect(error.message).to.be.equal('user.error.invalid.password')
+    expect(error!.message).to.be.equal('user.error.invalid.password')
     expect(authInterfaceMocked.create.callCount).to.be.equal(0)
   })
 })

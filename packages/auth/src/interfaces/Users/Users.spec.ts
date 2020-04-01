@@ -1,9 +1,9 @@
+import * as bcrypt from 'bcrypt'
 import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
-import { Types } from '@shared/utils/db'
-import * as bcrypt from 'bcrypt'
 
-import { errors } from '@shared/errors'
+import { EpiDrawError, errors } from '@shared/errors'
+import { Types } from '@shared/utils/db'
 import Users from '@shared/models/users'
 
 import { createUser } from '@test/fixtures'
@@ -34,12 +34,12 @@ describe('Users interface', () => {
       // @ts-ignore
       expect(user.toObject()).to.be.deep.equal(res.toObject())
 
-      const isItTheGoodPassword = await bcrypt.compare(u.password, user.password)
+      const isItTheGoodPassword = await bcrypt.compare(u.password, user!.password)
       expect(isItTheGoodPassword).to.be.equal(true)
     })
 
     it('Should thrown an error for uniq email', async () => {
-      let error = null
+      let error: EpiDrawError | null = null
 
       try {
         await userInterface.create({ ...newUser })
@@ -48,12 +48,12 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.message).to.be.equal('user.error.uniq.email')
-      expect(error.code).to.be.equal(errors.EMAIL_ALREADY_EXIST)
+      expect(error!.message).to.be.equal('user.error.uniq.email')
+      expect(error!.code).to.be.equal(errors.EMAIL_ALREADY_EXIST)
     })
 
     it('Should thrown an error for invalid email', async () => {
-      let error = null
+      let error: EpiDrawError | null = null
 
       try {
         await userInterface.create({
@@ -65,13 +65,15 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.message).to.be.equal('Users validation failed: email: Email is invalid')
-      expect(error.errors.email.path).to.be.equal('email')
-      expect(error.errors.email.kind).to.be.equal('INVALID_ARG')
+      expect(error!.message).to.be.equal('Users validation failed: email: Email is invalid')
+      // @ts-ignore
+      expect(error!.errors.email.path).to.be.equal('email')
+      // @ts-ignore
+      expect(error!.errors.email.kind).to.be.equal('INVALID_ARG')
     })
 
     it('Should thrown an error for invalid email', async () => {
-      let error = null
+      let error: EpiDrawError | null = null
 
       try {
         await userInterface.create({
@@ -83,9 +85,11 @@ describe('Users interface', () => {
       }
 
       expect(error).to.be.not.equal(null)
-      expect(error.message).to.be.equal('Users validation failed: email: Email is invalid')
-      expect(error.errors.email.path).to.be.equal('email')
-      expect(error.errors.email.kind).to.be.equal('INVALID_ARG')
+      expect(error!.message).to.be.equal('Users validation failed: email: Email is invalid')
+      // @ts-ignore
+      expect(error!.errors.email.path).to.be.equal('email')
+      // @ts-ignore
+      expect(error!.errors.email.kind).to.be.equal('INVALID_ARG')
     })
   })
 
@@ -94,7 +98,7 @@ describe('Users interface', () => {
       const user = await userInterface.findOne({ _id: newUser._id })
 
       expect(user).to.be.not.equal(null)
-      expect(user._id).to.be.deep.equal(newUser._id)
+      expect(user!._id).to.be.deep.equal(newUser._id)
     })
 
     it('should find no user', async () => {
