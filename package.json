@@ -4,6 +4,11 @@
     "auth.lint": "lerna exec npm run lint --scope auth",
     "auth.test": "lerna exec npm test --scope auth",
     "auth.update": "lerna exec npm update --scope auth",
+    "preinstall": "npm run shared.update && npm run shared.install",
+    "shared.install": "lerna exec npm ci --scope auth",
+    "shared.lint": "lerna exec npm run lint --scope auth",
+    "shared.test": "lerna exec npm test --scope auth",
+    "shared.update": "lerna exec npm update --scope auth",
     "lint": "concurrently 'npm:auth.lint'",
     "start": "docker-compose -f docker-compose.yml up",
     "test": "lerna exec npm test"
