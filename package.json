@@ -1,7 +1,9 @@
 {
   "scripts": {
     "auth.lint": "lerna exec npm run lint --scope auth",
-    "auth.test": "docker-compose -f docker-compose.auth.test.yml up --abort-on-container-exit",
+    "auth.test": "lerna exec npm test",
+    "auth.install": "lerna exec npm install",
+    "auth.update": "lerna exec npm update",
     "lint": "concurrently 'npm:auth.lint'",
     "start": "docker-compose -f docker-compose.yml up",
     "test": "concurrently 'npm:auth.test'"
