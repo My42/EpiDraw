@@ -11,6 +11,8 @@ jobs:
     working_directory: ~/packages/auth
     steps:
       - checkout # this pulls pulls code down from GitHub
+      - run: npm update
+      - run: npm install
       - run: npm run auth.update
       - run: npm run auth.install
       - run: npm run auth.test
