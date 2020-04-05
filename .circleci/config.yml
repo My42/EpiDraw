@@ -11,9 +11,9 @@ jobs:
     working_directory: ~/packages/auth
     steps:
       - checkout # this pulls pulls code down from GitHub
-      - run: npm run auth:update
-      - run: npm run auth:install
-      - run: npm run auth:test
+      - run: npm run auth.update
+      - run: npm run auth.install
+      - run: npm run auth.test
   two: # This is our second job.
     docker: # it runs inside a docker image, the same as above.
       - image: circleci/ruby:2.4.1
