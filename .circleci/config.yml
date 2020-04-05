@@ -13,7 +13,7 @@ jobs:
       - run: npm update
       - run: npm install
       - run: npm run auth.update
-      - run: npm run auth.install
+      - run: npm run auth.ci
       - run: ls packages/auth/node_modules/mongoose
       - run: npm run auth.test
 workflows:
