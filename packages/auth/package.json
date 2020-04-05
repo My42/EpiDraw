@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "dev": "docker-compose -f ../docker-compose.auth.dev.yml up",
+    "dev": "docker-compose -f ./docker-compose.auth.dev.yml up",
     "lint": "eslint ./src/**/* --ext .ts",
-    "start": "docker-compose -f ../docker-compose.auth.production.yml up",
+    "start": "docker-compose -f ./docker-compose.auth.production.yml up",
     "start.service": "ts-node -r tsconfig-paths/register src/app.ts",
-    "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
+    "test": "docker-compose -f ./docker-compose.auth.test.yml up --abort-on-container-exit"
   },
   "name": "auth",
   "version": "1.0.0",

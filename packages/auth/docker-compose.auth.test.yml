@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  auth:
+    image: 'auth-test'
+    build:
+      context: ../
+      dockerfile: ./auth/Dockerfile.test
+    container_name: 'epidraw-auth-test'
+    depends_on:
+      - database
+    links:
+      - database
+    volumes:
+      - ./src:/epidraw/packages/auth/src
+      - ./test:/epidraw/packages/auth/test
+      - ../shared/lib:/epidraw/packages/shared/lib
+
+  database:
+    image: mongo
+    container_name: 'epidraw-db'
+    ports:
+      - '27017-27019:27017-27019'
+    logging:
+      driver: none
