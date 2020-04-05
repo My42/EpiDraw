@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "auth.install": "lerna exec npm install --scope auth",
+    "auth.install": "lerna exec npm ci --scope auth",
     "auth.lint": "lerna exec npm run lint --scope auth",
     "auth.test": "lerna exec npm test --scope auth",
     "auth.update": "lerna exec npm update --scope auth",
