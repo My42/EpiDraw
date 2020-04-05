@@ -14,6 +14,7 @@ jobs:
       - run: ls packages/auth
       - run: npm update --prefix ./packages/auth
       - run: npm install --prefix ./packages/auth
+      - run: ls packages/auth
       - run: npm test --prefix ./packages/auth
   two: # This is our second job.
     docker: # it runs inside a docker image, the same as above.
@@ -21,7 +22,7 @@ jobs:
     steps:
       - checkout
       - run: echo "A more familiar hi" # We run a similar echo command to above.
-      - run: sleep 15 # and then sleep for 15 seconds.
+      #- run: sleep 15 # and then sleep for 15 seconds.
 # Under the workflows: map, we can coordinate our two jobs, defined above.
 workflows:
   version: 2
