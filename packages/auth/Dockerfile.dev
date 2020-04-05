@@ -6,7 +6,9 @@ RUN npm update & npm install
 
 WORKDIR /epidraw/packages/auth
 COPY ./auth .
-RUN npm update & npm install
+
+RUN npm update
+RUN npm install
 
 CMD ["npx", "nodemon", "-L", "--config", "./nodemon.json"]
 

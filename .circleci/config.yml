@@ -4,39 +4,26 @@
 #
 version: 2
 jobs:
-  build:
-    machine: true # Use a Linux VM instead of docker environment
-    working_directory: ~/repo
-    run:
-
+  auth:
+    docker:
+      - image: circleci/node:12.13.1
+      - image: mongo:2.6.8-jessie
     steps:
-
-      - run: sudo apt-get install apt-transport-https
-      - run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-      - run: echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-      - run: sudo apt-get update && sudo apt-get install yarn
-
-      - run:
-          name: Install  Node.js 8.9.1 with build in nvm tool
-          # https://www.cloudesire.com/how-to-upgrade-node-on-circleci-machine-executor/
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            nvm install v8.11.3 && nvm use v8.11.3 && nvm alias default v8.11.3
-            node -v
-
-      - run:
-          name: Check node version
-          command: |
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-            node -v
-
+      - checkout # this pulls pulls code down from GitHub
+      - run: npm update --prefix ./packages/auth
+      - run: npm install --prefix ./packages/auth
+      - run: npm test --prefix ./packages/auth
+  two: # This is our second job.
+    docker: # it runs inside a docker image, the same as above.
+      - image: circleci/ruby:2.4.1
+    steps:
       - checkout
-
-      - run: |
-          export NVM_DIR="/opt/circleci/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-          yarn install
-          yarn test
-          yarn lint
+      - run: echo "A more familiar hi" # We run a similar echo command to above.
+      - run: sleep 15 # and then sleep for 15 seconds.
+# Under the workflows: map, we can coordinate our two jobs, defined above.
+workflows:
+  version: 2
+  one_and_two: # this is the name of our workflow
+    jobs: # and here we list the jobs we are going to run.
+      - auth
+      - two

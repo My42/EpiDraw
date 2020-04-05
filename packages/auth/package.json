@@ -1,15 +1,16 @@
 {
   "scripts": {
     "dev": "docker-compose -f ./docker-compose.auth.dev.yml up",
+    "dev.test": "docker-compose -f ./docker-compose.auth.test.yml up --abort-on-container-exit",
     "lint": "eslint ./src/**/* --ext .ts",
     "start": "docker-compose -f ./docker-compose.auth.production.yml up",
     "start.service": "ts-node -r tsconfig-paths/register src/app.ts",
-    "test": "docker-compose -f ./docker-compose.auth.test.yml up --abort-on-container-exit"
+    "test": "npx ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
   },
   "name": "auth",
   "version": "1.0.0",
   "description": "This is EpiDraw's API",
-  "repository": "git@github.com:My42/EpiDraw.git",
+  "repository": "git@github.com:My42/epidraw.git",
   "author": "Vincent Mesquita",
   "license": "MIT",
   "devDependencies": {

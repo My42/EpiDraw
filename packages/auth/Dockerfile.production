@@ -6,7 +6,10 @@ COPY . .
 
 RUN ls
 
-RUN npm update & npm install
+RUN npm update
+RUN npm install
+
+ENV APP_ENV PROD
 
 CMD ["npm", "start", "start.service"]
 

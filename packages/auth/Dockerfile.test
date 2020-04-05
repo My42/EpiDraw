@@ -1,5 +1,9 @@
 FROM node:12.13.1
 
+# FOR CIRCLE.CI
+LABEL com.circleci.preserve-entrypoint=true
+ENTRYPOINT contacts
+
 RUN pwd
 
 WORKDIR /usr/app
@@ -9,16 +13,19 @@ RUN pwd
 WORKDIR /epidraw/packages/shared
 COPY ./shared .
 RUN ls
-RUN npm update & npm install
+RUN npm update
+RUN npm install
 
 WORKDIR /epidraw/packages/auth
 COPY ./auth .
-RUN npm update & npm install
+RUN npm update
+RUN npm install
 
 RUN pwd
 RUN ls
 
+ENV APP_ENV TEST
 
-CMD ["npx", "ts-mocha", "--paths", "-p", "./tsconfig.json", "'src/**/*.spec.ts'"]
+CMD ["npm", "test"]
 
 EXPOSE 8081
