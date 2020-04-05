@@ -12,10 +12,11 @@ jobs:
       - checkout # this pulls pulls code down from GitHub
       - run: ls
       - run: ls packages/auth
-      - run: npm update --prefix ./packages/auth
-      - run: npm install --prefix ./packages/auth
-      - run: ls packages/auth
-      - run: npm test --prefix ./packages/auth
+      - run: cd packages/auth
+      - run: npm update
+      - run: npm install
+      - run: ls
+      - run: npm test
   two: # This is our second job.
     docker: # it runs inside a docker image, the same as above.
       - image: circleci/ruby:2.4.1
