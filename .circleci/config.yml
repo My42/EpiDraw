@@ -16,6 +16,7 @@ jobs:
       - run: npm run auth.update
       - run: npm run auth.install
       - run: npm run auth.test
+      - run: ls packages/auth/node_modules/mongoose
 workflows:
   version: 2
   microservies: # this is the name of our workflow
