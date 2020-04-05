@@ -15,18 +15,9 @@ jobs:
       - run: npm install
       - run: npm run auth.update
       - run: npm run auth.install
-      - run: npm run auth.test
-  two: # This is our second job.
-    docker: # it runs inside a docker image, the same as above.
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A more familiar hi" # We run a similar echo command to above.
-      #- run: sleep 15 # and then sleep for 15 seconds.
-# Under the workflows: map, we can coordinate our two jobs, defined above.
+      - run: npm test
 workflows:
   version: 2
-  one_and_two: # this is the name of our workflow
+  microservies: # this is the name of our workflow
     jobs: # and here we list the jobs we are going to run.
       - auth
-      - two
