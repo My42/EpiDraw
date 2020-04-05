@@ -7,7 +7,7 @@ jobs:
   auth:
     docker:
       - image: circleci/node:12.13.1
-      - image: mongo:2.6.8-jessie
+      - image: mongo
     steps:
       - checkout # this pulls pulls code down from GitHub
       - run: npm update --prefix ./packages/auth
