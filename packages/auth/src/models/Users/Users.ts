@@ -1,4 +1,4 @@
-import UsersModel from '@/models/users'
+import UsersModel from './model'
 import { UserMongo } from '@/types/user'
 import { EpiDrawError, errors } from '@/errors'
 

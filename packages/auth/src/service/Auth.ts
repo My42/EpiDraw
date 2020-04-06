@@ -5,7 +5,7 @@ import {
   password as passwordRegEx,
   username as usernameRegEx
 } from '@shared/regExes'
-import { Users } from '@/interfaces/Users'
+import { Users } from '@/models/Users'
 import { EpiDrawError, errors } from '@/errors'
 
 interface SignUpArgs {

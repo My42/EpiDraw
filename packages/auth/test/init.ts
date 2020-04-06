@@ -1,10 +1,10 @@
 import { after, before } from 'mocha'
-import { connect, connection, disconnect } from '@shared/utils/db'
+import { connect, connection, disconnect } from 'mongoose'
 
 before(async () => {
   console.log('BEFORE')
   try {
-    await connect('mongodb://localhost:27017/EpiDrawTest',
+    await connect('mongodb://database:27017/EpiDrawTest',
       { useNewUrlParser: true, useUnifiedTopology: true })
   } catch (e) {
     console.log('ERROR = ', e)

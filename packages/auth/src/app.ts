@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import 'express-async-errors'
 
-import { Users as UsersInterface } from '@/interfaces'
+import { Users as UsersInterface } from '@/models'
 import { Auth } from '@/service'
 import { EpiDrawError } from '@/errors'
 

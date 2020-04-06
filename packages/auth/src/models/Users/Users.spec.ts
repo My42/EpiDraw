@@ -4,7 +4,7 @@ import { expect } from 'chai'
 
 import { EpiDrawError, errors } from '@/errors'
 import { Types } from '@shared/utils/db'
-import Users from '@/models/users'
+import Users from '@/models/Users/model'
 
 import { createUser } from '@test/fixtures'
 
@@ -98,7 +98,7 @@ describe('Users interface', () => {
       const user = await userInterface.findOne({ _id: newUser._id })
 
       expect(user).to.be.not.equal(null)
-      expect(user!._id).to.be.deep.equal(newUser._id)
+      expect(user).to.be.deep.equal(newUser)
     })
 
     it('should find no user', async () => {

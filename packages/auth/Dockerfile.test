@@ -1,9 +1,5 @@
 FROM node:12.13.1
 
-# FOR CIRCLE.CI
-LABEL com.circleci.preserve-entrypoint=true
-ENTRYPOINT contacts
-
 RUN pwd
 
 WORKDIR /usr/app

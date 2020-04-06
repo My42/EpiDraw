@@ -18,7 +18,7 @@ services:
 
   database:
     image: mongo
-    container_name: 'epidraw-db'
+    container_name: 'epidraw-db-test'
     ports:
       - '27017-27019:27017-27019'
     logging:
