@@ -31,8 +31,7 @@ describe('Users interface', () => {
       const user = await Users.findOne({ email: u.email, username: u.username })
 
       expect(user).to.not.be.equal(null)
-      // @ts-ignore
-      expect(user.toObject()).to.be.deep.equal(res.toObject())
+      expect(user!.toObject()).to.be.deep.equal(res)
 
       const isItTheGoodPassword = await bcrypt.compare(u.password, user!.password)
       expect(isItTheGoodPassword).to.be.equal(true)
@@ -97,8 +96,11 @@ describe('Users interface', () => {
     it('should find one user', async () => {
       const user = await userInterface.findOne({ _id: newUser._id })
 
+      console.log('user =', { ...user })
+      console.log('newUser =', { ...newUser })
+
       expect(user).to.be.not.equal(null)
-      expect(user).to.be.deep.equal(newUser)
+      expect(user!._id.toString()).to.be.deep.equal(newUser._id.toString())
     })
 
     it('should find no user', async () => {
@@ -110,9 +112,9 @@ describe('Users interface', () => {
 
   describe('User.delete', () => {
     it('should delete the user', async () => {
-      await userInterface.delete({ id: newUser.id.toString() })
+      await userInterface.delete({ id: newUser._id.toString() })
 
-      const user = await Users.findOne({ id: newUser.id.toString() })
+      const user = await Users.findOne({ id: newUser._id.toString() })
 
       expect(user).to.be.equal(null)
     })
@@ -120,7 +122,7 @@ describe('Users interface', () => {
     it('should happen nothing', async () => {
       let error = null
       try {
-        await userInterface.delete({ id: newUser.id.toString() })
+        await userInterface.delete({ id: newUser!._id.toString() })
       } catch (e) {
         error = e
       }

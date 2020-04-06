@@ -14,6 +14,8 @@ export const schema = new Schema({
   password: { type: String, required: true }
 })
 
+schema.set('toObject', { versionKey: false })
+
 schema.pre('save', async function (next) {
   const user = this as UserDocument
 

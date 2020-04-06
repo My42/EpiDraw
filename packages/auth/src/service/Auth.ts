@@ -33,6 +33,6 @@ export class Auth {
 
     const newUser = await this.#usersInterface.create({ email, password, username })
 
-    return pick(newUser, ['id', 'email', 'username'])
+    return pick(newUser, ['_id', 'email', 'username'])
   }
 }

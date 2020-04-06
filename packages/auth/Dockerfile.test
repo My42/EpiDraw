@@ -1,11 +1,5 @@
 FROM node:12.13.1
 
-RUN pwd
-
-WORKDIR /usr/app
-
-RUN pwd
-
 WORKDIR /epidraw/packages/shared
 COPY ./shared .
 RUN ls
