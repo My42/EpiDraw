@@ -6,7 +6,7 @@ import {
   username as usernameRegEx
 } from '@shared/regExes'
 import { Users } from '@/interfaces/Users'
-import { EpiDrawError, errors } from '@shared/errors'
+import { EpiDrawError, errors } from '@/errors'
 
 interface SignUpArgs {
   email: string,

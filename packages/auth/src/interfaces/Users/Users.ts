@@ -1,6 +1,6 @@
-import UsersModel from '@shared/models/users'
-import { UserMongo } from '@shared/types/user'
-import { EpiDrawError, errors } from '@shared/errors'
+import UsersModel from '@/models/users'
+import { UserMongo } from '@/types/user'
+import { EpiDrawError, errors } from '@/errors'
 
 export interface CreateArgs {
   email: string;

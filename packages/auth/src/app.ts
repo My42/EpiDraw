@@ -5,7 +5,7 @@ import 'express-async-errors'
 
 import { Users as UsersInterface } from '@/interfaces'
 import { Auth } from '@/service'
-import { EpiDrawError } from '@shared/errors'
+import { EpiDrawError } from '@/errors'
 
 connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })

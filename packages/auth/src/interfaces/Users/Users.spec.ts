@@ -2,9 +2,9 @@ import * as bcrypt from 'bcrypt'
 import { after, before, describe, it } from 'mocha'
 import { expect } from 'chai'
 
-import { EpiDrawError, errors } from '@shared/errors'
+import { EpiDrawError, errors } from '@/errors'
 import { Types } from '@shared/utils/db'
-import Users from '@shared/models/users'
+import Users from '@/models/users'
 
 import { createUser } from '@test/fixtures'
 
