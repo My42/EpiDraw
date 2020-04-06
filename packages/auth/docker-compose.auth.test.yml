@@ -7,6 +7,8 @@ services:
       context: ../
       dockerfile: ./auth/Dockerfile.test
     container_name: 'epidraw-auth-test'
+    environment:
+      - DATABASE_HOST=database
     depends_on:
       - database
     links:
