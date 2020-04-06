@@ -14,7 +14,7 @@ connect('mongodb://database:27017/EpiDraw',
 
     const app = express()
 
-    app.use(bodyParser())
+    app.use(bodyParser.json())
 
     app.post('/signUp', async (req, res) => {
       const { email, username, password } = req.body || { }
