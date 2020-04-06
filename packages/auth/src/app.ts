@@ -23,6 +23,13 @@ connect('mongodb://database:27017/EpiDraw',
       return res.json(result)
     })
 
+    app.post('/signIn', async (req, res) => {
+      const { email, password } = req.body || {}
+      const token = await service.signIn({ email, password })
+
+      return res.json({ token })
+    })
+
     app.use((err, req, res, next) => {
       if (!err) return next()
       if (err instanceof EpiDrawError) {
@@ -36,4 +43,3 @@ connect('mongodb://database:27017/EpiDraw',
     app.listen(8081, () => console.log(`🚀 Auth service ready on port '${8081}'`))
   })
   .catch(error => console.log(error))
-

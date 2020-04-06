@@ -14,7 +14,7 @@ const userInterface = new UsersInterface()
 
 const newUser = createUser()
 
-describe('Users interface', () => {
+describe('[Interface] Users', () => {
   before(async () => {
     await Users.create(newUser)
   })
@@ -95,9 +95,6 @@ describe('Users interface', () => {
   describe('User.findOne', () => {
     it('should find one user', async () => {
       const user = await userInterface.findOne({ _id: newUser._id })
-
-      console.log('user =', { ...user })
-      console.log('newUser =', { ...newUser })
 
       expect(user).to.be.not.equal(null)
       expect(user!._id.toString()).to.be.deep.equal(newUser._id.toString())

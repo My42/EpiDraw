@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import pick from 'lodash/pick'
 
 import {
@@ -21,9 +22,11 @@ interface SignInArgs {
 
 export class Auth {
   #usersInterface: Users
+  #jwtPrivateKey: string
 
   constructor (usersInterface: Users) {
     this.#usersInterface = usersInterface
+    this.#jwtPrivateKey = process.env.JWT_PRIVATE_KEY || 'secret'
   }
 
   async signUp ({ email = '', password = '', username = '' } : SignUpArgs) {
@@ -34,5 +37,13 @@ export class Auth {
     const newUser = await this.#usersInterface.create({ email, password, username })
 
     return pick(newUser, ['_id', 'email', 'username'])
+  }
+
+  async signIn ({ email = '', password = '' }: SignInArgs) {
+    const user = await this.#usersInterface.findOne({ email, password })
+
+    if (!user) throw new EpiDrawError(errors.USER_UNKNOWN, 'user.error.unknown')
+
+    return jwt.sign({ sub: user._id.toString() }, this.#jwtPrivateKey)
   }
 }
