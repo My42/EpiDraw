@@ -44,6 +44,10 @@ export class Auth {
 
     if (!user) throw new EpiDrawError(errors.USER_UNKNOWN, 'user.error.unknown')
 
-    return jwt.sign({ sub: user._id.toString() }, this.#jwtPrivateKey)
+    return jwt.sign(
+      { sub: user._id.toString() },
+      this.#jwtPrivateKey,
+      { expiresIn: '1d' }
+    )
   }
 }

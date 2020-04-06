@@ -1,5 +1,6 @@
 import { describe, it, test } from 'mocha'
 import { expect } from 'chai'
+import jwt from 'jsonwebtoken'
 import sinon, { SinonStubbedInstance } from 'sinon'
 import pick from 'lodash/pick'
 
@@ -112,8 +113,13 @@ describe('[Service] Auth', () => {
       userInterface.findOne.resolves(user)
 
       const token = await authService.signIn(user)
+      const decoded: { [key: string]: any } = jwt.verify(token, 'secret') as object
 
       expect(token).to.be.a('string')
+      expect(decoded).to.have.all.keys('sub', 'iat', 'exp')
+      expect(decoded.sub).to.be.equal(user._id.toString())
+      expect(decoded.iat).to.be.a('number')
+      expect(decoded.exp).to.be.a('number')
       expect(userInterface.findOne.callCount).to.be.deep.equal(1)
       expect(userInterface.findOne.getCall(0).args[0]).to.be.deep.equal({
         email: user.email,
