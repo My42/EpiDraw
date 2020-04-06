@@ -24,10 +24,17 @@ connect('mongodb://database:27017/EpiDraw',
     })
 
     app.post('/signIn', async (req, res) => {
-      const { email, password } = req.body || {}
+      const { email, password } = req.body || { }
       const token = await service.signIn({ email, password })
 
       return res.json({ token })
+    })
+
+    app.get('/verify', async (req, res) => {
+      const { token } = req.body || { }
+      const decoded = await service.verify({ token })
+
+      return res.json({ token: decoded })
     })
 
     app.use((err, req, res, next) => {

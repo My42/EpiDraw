@@ -127,4 +127,32 @@ describe('[Service] Auth', () => {
       })
     })
   })
+
+  describe('Auth.verify', () => {
+    test('Valid token', async () => {
+      const { authService, userInterface } = createAuthService()
+      const user = createUser()
+
+      userInterface.findOne.resolves(user)
+
+      const token = await authService.signIn(user)
+      const decoded = authService.verify({ token })
+
+      expect(decoded).to.be.not.equal(null)
+      expect(decoded!.sub).to.be.equal(user._id.toString())
+      expect(decoded!.iat).to.be.a('number')
+      expect(decoded!.exp).to.be.a('number')
+    })
+
+    test('Invalid token', async () => {
+      const { authService, userInterface } = createAuthService()
+      const user = createUser()
+
+      userInterface.findOne.resolves(user)
+
+      const decoded = authService.verify({ token: 'FAKE_TOKEN' })
+
+      expect(decoded).to.be.equal(null)
+    })
+  })
 })
