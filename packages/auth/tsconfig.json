@@ -6,8 +6,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@shared/*": ["../shared/lib/*"],
+      "@auth/*": ["./src/*"],
       "@test/*": ["./test/*"]
     },
     "strictNullChecks": true

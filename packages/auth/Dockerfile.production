@@ -1,16 +1,14 @@
 FROM node:12.13.1
 
-WORKDIR /usr/app
-
-COPY . .
-
-RUN ls
+WORKDIR /epidraw/packages/auth
+COPY ./ .
 
 RUN npm update
 RUN npm install
 
-ENV APP_ENV PROD
+ENV APP_ENV prod
 
-CMD ["npm", "start", "start.service"]
+CMD ["npm", "start"]
 
 EXPOSE 8081
+

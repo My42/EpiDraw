@@ -7,7 +7,7 @@ import { Auth } from '@auth/service'
 
 import signUp from './signUp'
 import { createUser } from '../../../../../../../auth/test/fixtures'
-import { Context } from '@shared/types/Context'
+import { Context } from '@auth/types/Context'
 
 const user = createUser()
 

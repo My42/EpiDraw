@@ -1,11 +1,11 @@
-import { connect } from '@shared/utils/db'
+import { connect } from 'mongoose'
 import bodyParser from 'body-parser'
 import express from 'express'
 import 'express-async-errors'
 
-import { Users as UsersInterface } from '@/models'
-import { Auth } from '@/service'
-import { EpiDrawError } from '@/errors'
+import { Users as UsersInterface } from '@auth/models'
+import { Auth } from '@auth/service'
+import { EpiDrawError } from '@auth/errors'
 
 connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })

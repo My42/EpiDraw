@@ -4,8 +4,8 @@ services:
   auth:
     image: 'auth-test'
     build:
-      context: ../
-      dockerfile: ./auth/Dockerfile.test
+      context: .
+      dockerfile: ./Dockerfile.test
     container_name: 'epidraw-auth-test'
     environment:
       - DATABASE_HOST=database
@@ -17,7 +17,6 @@ services:
       - ./src:/epidraw/packages/auth/src
       - ./test:/epidraw/packages/auth/test
       - ./test/fixtures:/epidraw/packages/auth/test/fixtures
-      - ../shared/lib:/epidraw/packages/shared/lib
 
   database:
     image: mongo

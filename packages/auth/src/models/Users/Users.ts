@@ -1,6 +1,6 @@
 import UsersModel from './model'
-import { UserMongo } from '@/types/user'
-import { EpiDrawError, errors } from '@/errors'
+import { UserMongo } from '@auth/types/user'
+import { EpiDrawError, errors } from '@auth/errors'
 
 export interface CreateArgs {
   email: string;

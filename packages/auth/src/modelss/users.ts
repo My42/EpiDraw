@@ -1,8 +1,8 @@
 import { hash } from 'bcrypt'
 import { Schema, model, models } from 'mongoose'
 
-import { UserDocument } from '@/types'
-import { email as emailRegEx } from '@shared/regExes'
+import { UserDocument } from '@auth/types'
+import { email as emailRegEx } from '@auth/regExes'
 
 export const BCRYPT_SALT_ROUNDS = 10
 

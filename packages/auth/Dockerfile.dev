@@ -1,14 +1,14 @@
 FROM node:12.13.1
 
-WORKDIR /epidraw/packages/shared
-COPY ./shared .
-RUN npm update & npm install
-
 WORKDIR /epidraw/packages/auth
-COPY ./auth .
+COPY ./ .
+
+RUN ls
 
 RUN npm update
 RUN npm install
+
+ENV APP_ENV dev
 
 CMD ["npx", "nodemon", "-L", "--config", "./nodemon.json"]
 

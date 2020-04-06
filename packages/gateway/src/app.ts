@@ -2,7 +2,7 @@ import {
   ApolloServer,
   mergeSchemas
 } from 'apollo-server'
-import { connect } from '@shared/utils/db'
+import { connect } from 'mongoose'
 // import { createContext } from '../utils'
 import { AuthSchema } from './service/schemas'
 

@@ -1,20 +1,14 @@
 FROM node:12.13.1
 
-WORKDIR /epidraw/packages/shared
-COPY ./shared .
-RUN ls
-RUN npm update
-RUN npm install
-
 WORKDIR /epidraw/packages/auth
-COPY ./auth .
+COPY ./ .
 RUN npm update
 RUN npm install
 
 RUN pwd
 RUN ls
 
-ENV APP_ENV TEST
+ENV APP_ENV test
 
 CMD ["npm", "test"]
 

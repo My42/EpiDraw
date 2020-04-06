@@ -10,8 +10,6 @@ jobs:
       - image: mongo
     steps:
       - checkout # this pulls pulls code down from GitHub
-      - run: npm update
-      - run: npm install
       - run: npm run auth.update
       - run: npm run auth.ci
       - run: npm run auth.test

@@ -5,10 +5,10 @@ import {
   email as emailRegEx,
   password as passwordRegEx,
   username as usernameRegEx
-} from '@shared/regExes'
-import { Users } from '@/models/Users'
-import { EpiDrawError, errors } from '@/errors'
-import { UserMongo } from '@/types'
+} from '@auth/regExes'
+import { Users } from '@auth/models/Users'
+import { EpiDrawError, errors } from '@auth/errors'
+import { UserMongo } from '@auth/types'
 
 interface SignUpArgs {
   email: string;
