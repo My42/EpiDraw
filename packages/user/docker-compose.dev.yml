@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  user:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: 'epidraw-user-dev'
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./__init__.py:/epidraw/packages/user/__init__.py
+
+  database:
+    image: mongo
+    container_name: 'epidraw-user-db'
+    ports:
+      - '27017-27019:27017-27019'
