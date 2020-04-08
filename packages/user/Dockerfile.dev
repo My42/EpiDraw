@@ -1,0 +1,10 @@
+FROM python:3.7.x
+
+WORKDIR /epidraw/packages/user
+
+COPY . .
+
+ENV FLASK_ENV=development
+ENV FLASK_APP=__init__.py
+
+RUN pip install -r requirements.txt
