@@ -13,10 +13,11 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - ./__init__.py:/epidraw/packages/user/__init__.py
+      - ./app.py:/epidraw/packages/user/app.py
+      - ./src:/epidraw/packages/user/src
 
   database:
     image: mongo
     container_name: 'epidraw-user-db'
     ports:
-      - '27017-27019:27017-27019'
+      - '5001:27017'
