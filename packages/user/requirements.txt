@@ -2,3 +2,4 @@ Flask
 pymongo
 jsonschema
 bcrypt
+pytest
