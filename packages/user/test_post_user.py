@@ -80,8 +80,24 @@ def test_user_succeed():
     )
     json_response = response.get_json()
 
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert json_response.get('email') == data.get('email')
     assert json_response.get('username') == data.get('username')
     assert json_response.get('id') != None
     assert json_response.get('password') == None
+
+def test_user_email_already_exists():
+    data = {
+        'email': 'good.email@gmail.com',
+        'password': 'coucou0%',
+        'username': 'Tangara'
+    }
+    response = app.test_client().post(
+        '/user',
+        data=json.dumps(data),
+        content_type='application/json',
+    )
+    data = response.get_data(as_text=True)
+
+    assert response.status_code == 409
+    assert response.data == b'Email already exists'
