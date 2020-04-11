@@ -3,9 +3,9 @@ import time
 
 from flask import Flask
 from pymongo import MongoClient
-
-from flask import request, Response
+from flask import request
 from jsonschema import validate, ValidationError
+from src.user_schema import schema
 
 try:
     client = MongoClient('database', 27017)
@@ -25,19 +25,9 @@ def index():
 create_user_schema = {
     'type': 'object',
     'properties': {
-        'email': {
-            'pattern': r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
-            'type': 'string'
-        },
-        'password': {
-            'minLength': 8,
-            'pattern': r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
-            'type': 'string'
-        },
-        'username': {
-            'minLength': 3,
-            'type': 'string'
-        }
+        'email': schema.get('email'),
+        'password': schema.get('password'),
+        'username': schema.get('username')
     },
     'required': ['email', 'password', 'username']
 }
@@ -68,4 +58,40 @@ def create_user_route():
         'email': user.get('email'),
         'username': user.get('username'),
         'createdAt': user.get('createdAt')
+    }, 201
+
+
+get_user_schema = {
+    'type': 'object',
+    'properties': {
+        'email': schema.get('email'),
+        'username': schema.get('username')
+    },
+}
+
+
+@app.route('/user', methods=['GET'])
+def get_user_route():
+    if not request.is_json:
+        return 'Bad request: Body must be formatted as a json', 400
+    data = request.get_json()
+
+    try:
+        validate(instance=data, schema=get_user_schema)
+    except ValidationError:
+        return 'Bad request', 400
+
+    user = db.users.find_one(data)
+
+    if not user:
+        return {}
+
+    object_id = user.pop('_id')
+    user.pop('password')
+
+    print('user =', user, flush=True)
+
+    return {
+        'id': str(object_id),
+        **user
     }
