@@ -1,5 +1,5 @@
 import unittest
-from app import app
+from app import app, db
 from flask import json
 import json
 
@@ -101,3 +101,20 @@ def test_user_email_already_exists():
 
     assert response.status_code == 409
     assert response.data == b'Email already exists'
+
+def test_get_user():
+    user = db.users.find_one()
+    response = app.test_client().get(
+        '/user/{0}'.format(str(user.get('_id'))),
+    )
+
+    print('/user/{0}'.format(str(user.get('_id'))))
+
+    json_response = response.get_json()
+
+    print(json_response)
+
+    assert response.status_code == 200
+    assert json_response.get('email') == user.get('email')
+    assert json_response.get('username') == user.get('username')
+    assert json_response.get('password') == None

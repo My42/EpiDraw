@@ -3,6 +3,7 @@ import time
 
 from flask import Flask
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 from flask import request
 from jsonschema import validate, ValidationError
 from src.user_schema import schema
@@ -44,7 +45,7 @@ def create_user_route():
     except ValidationError:
         return 'Bad request', 400
 
-    if db.users.find_one({ 'email': data.get('email') }):
+    if db.users.find_one({'email': data.get('email')}):
         return 'Email already exists', 409
 
     user = {
@@ -57,34 +58,18 @@ def create_user_route():
     doc = db.users.insert_one(user)
 
     return {
-        'id': str(doc.inserted_id),
-        'email': user.get('email'),
-        'username': user.get('username'),
-        'createdAt': user.get('createdAt')
-    }, 201
+               'id': str(doc.inserted_id),
+               'email': user.get('email'),
+               'username': user.get('username'),
+               'createdAt': user.get('createdAt')
+           }, 201
 
 
-get_user_schema = {
-    'type': 'object',
-    'properties': {
-        'email': schema.get('email'),
-        'username': schema.get('username')
-    },
-}
+@app.route('/user/<string:user_id>', methods=['GET'])
+def get_user_route(user_id: str):
+    user = db.users.find_one({'_id': ObjectId(user_id)})
 
-
-@app.route('/user', methods=['GET'])
-def get_user_route():
-    if not request.is_json:
-        return 'Bad request: Body must be formatted as a json', 400
-    data = request.get_json()
-
-    try:
-        validate(instance=data, schema=get_user_schema)
-    except ValidationError:
-        return 'Bad request', 400
-
-    user = db.users.find_one(data)
+    print('user =', user, flush=True)
 
     if not user:
         return {}

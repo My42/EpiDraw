@@ -1,8 +1,7 @@
 version: '3'
 
 services:
-
-  user:
+  user-test:
     tty: true
     build:
       context: .
@@ -21,7 +20,6 @@ services:
 
   database:
     image: mongo
-    restart: always
     container_name: 'epidraw-user-db-test'
     ports:
       - '5002:27017'
