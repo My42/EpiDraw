@@ -44,6 +44,9 @@ def create_user_route():
     except ValidationError:
         return 'Bad request', 400
 
+    if db.users.find_one({ 'email': data.get('email') }):
+        return 'Email already exists', 409
+
     user = {
         'email': data.get('email'),
         'password': bcrypt.hashpw(data.get('password').encode('utf-8'), bcrypt.gensalt()),
