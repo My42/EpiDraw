@@ -9,7 +9,7 @@ app.config['TESTING'] = True
 
 def test_user_bad_args():
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps({'a': 1, 'b': 2}),
         content_type='application/json',
     )
@@ -21,7 +21,7 @@ def test_user_bad_args():
 
 def test_user_bad_email():
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps({
             'email': 'bad_email',
             'password': 'coucou0%',
@@ -37,7 +37,7 @@ def test_user_bad_email():
 
 def test_user_bad_password():
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps({
             'email': 'good.email@gmail.com',
             'password': 'badPassword',
@@ -53,7 +53,7 @@ def test_user_bad_password():
 
 def test_user_bad_username():
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps({
             'email': 'good.email@gmail.com',
             'password': 'coucou0%',
@@ -74,7 +74,7 @@ def test_user_succeed():
         'username': 'Tangara'
     }
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps(data),
         content_type='application/json',
     )
@@ -93,7 +93,7 @@ def test_user_email_already_exists():
         'username': 'Tangara'
     }
     response = app.test_client().post(
-        '/',
+        '/user',
         data=json.dumps(data),
         content_type='application/json',
     )
@@ -105,10 +105,10 @@ def test_user_email_already_exists():
 def test_get_user():
     user = db.users.find_one()
     response = app.test_client().get(
-        '/{0}'.format(str(user.get('_id'))),
+        '/user/{0}'.format(str(user.get('_id'))),
     )
 
-    print('/{0}'.format(str(user.get('_id'))))
+    print('/user/{0}'.format(str(user.get('_id'))))
 
     json_response = response.get_json()
 

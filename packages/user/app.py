@@ -34,7 +34,7 @@ create_user_schema = {
 }
 
 
-@app.route('/', methods=['POST'])
+@app.route('/user', methods=['POST'])
 def create_user_route():
     if not request.is_json:
         return 'Bad request: Body must be formatted as a json', 400
@@ -65,7 +65,7 @@ def create_user_route():
            }, 201
 
 
-@app.route('/<string:user_id>', methods=['GET'])
+@app.route('/user/<string:user_id>', methods=['GET'])
 def get_user_route(user_id: str):
     user = db.users.find_one({'_id': ObjectId(user_id)})
 
