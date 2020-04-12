@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  user-test:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: 'epidraw-user-test'
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./app.py:/epidraw/packages/user/app.py
+      - ./src:/epidraw/packages/user/src
+      - ./test_post_user.py:/epidraw/packages/user/test_post_user.py
+
+  database:
+    image: mongo
+    container_name: 'epidraw-user-db-test'
+    ports:
+      - '5002:27017'
+    logging:
+      driver: none
+
