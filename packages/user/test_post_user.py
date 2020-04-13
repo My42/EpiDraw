@@ -83,8 +83,9 @@ def test_user_succeed():
     assert response.status_code == 201
     assert json_response.get('email') == data.get('email')
     assert json_response.get('username') == data.get('username')
-    assert json_response.get('id') != None
-    assert json_response.get('password') == None
+    assert json_response.get('id') is not None
+    assert json_response.get('password')is None
+
 
 def test_user_email_already_exists():
     data = {
@@ -102,6 +103,7 @@ def test_user_email_already_exists():
     assert response.status_code == 409
     assert response.data == b'Email already exists'
 
+
 def test_get_user():
     user = db.users.find_one()
     response = app.test_client().get(
@@ -115,6 +117,7 @@ def test_get_user():
     assert json_response.get('username') == user.get('username')
     assert json_response.get('password') == None
 
+
 def test_get_users():
     response = app.test_client().get('/users')
 
@@ -122,3 +125,12 @@ def test_get_users():
 
     assert response.status_code == 200
     assert isinstance(json_response, list)
+
+
+def test_delete_user_by_id():
+    user = db.users.find_one()
+    response = app.test_client().delete('/users/{0}'.format(str(user.get('_id'))))
+
+    user = db.users.find_one()
+
+    assert user is None

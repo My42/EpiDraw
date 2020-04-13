@@ -87,3 +87,10 @@ def get_user_route(user_id: str):
             users.append(get_public_user_field(user))
 
         return jsonify(users)
+
+
+@app.route('/users/<string:user_id>', methods=['DELETE'])
+def delete_user_by_id(user_id):
+    db.users.delete_one({'_id': ObjectId(user_id)})
+
+    return 'Deleted', 204
