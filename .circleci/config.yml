@@ -17,7 +17,7 @@ jobs:
       - run: npm run auth.test
   user:
     docker:
-      - image: circleci/python:lastest
+      - image: circleci/python:latest
       - image: mongo
     steps:
       - checkout # this pulls pulls code down from GitHub
