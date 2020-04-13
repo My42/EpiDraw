@@ -23,9 +23,8 @@ jobs:
       - checkout # this pulls pulls code down from GitHub
       - run: npm update
       - run: npm install
-      - run: npm run auth.update
-      - run: npm run auth.ci
-      - run: npm run auth.test
+      - run: npm run user.install
+      - run: npm run user.test
 workflows:
   version: 2
   microservies: # this is the name of our workflow
