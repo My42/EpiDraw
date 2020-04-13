@@ -5,7 +5,7 @@
     "auth.test": "lerna exec npm test --scope auth",
     "auth.update": "lerna exec npm update --scope auth",
     "lint": "concurrently 'npm:auth.lint'",
-    "user.install":  "lerna exec pip install --scope user",
+    "user.install":  "lerna exec pip install -r requirements.txt --scope user",
     "user.test":  "lerna exec python3 scripts/test.py scripts --scope user",
     "start": "docker-compose -f docker-compose.yml up",
     "test": "lerna exec npm test"
