@@ -12,7 +12,15 @@ from src.get_public_user_field import get_public_user_field
 from flask import jsonify
 
 try:
-    client = MongoClient(os.environ['DATABASE_HOST'], 27017)
+    db_host = os.environ['DATABASE_HOST']
+except KeyError:
+    db_host = 'localhost'
+
+
+print('db_host =', db_host)
+
+try:
+    client = MongoClient(db_host, 27017)
     db = client.epidraw_user
 except:
     raise Exception('Not able to connect to the database')

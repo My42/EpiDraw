@@ -1,3 +1,3 @@
 import os
 
-os.system('pytest -v')
+os.system('pytest')
