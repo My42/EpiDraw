@@ -1,0 +1,41 @@
+version: '3'
+services:
+  user:
+    build:
+      context: packages/user
+      dockerfile: Dockerfile.dev
+    container_name: epidraw-dev-user
+    depends_on:
+      - database-user
+    links:
+      - database-user
+    ports:
+      - '8080:5000'
+    volumes:
+      - './packages/user/app.py:/epidraw/packages/user/app.py'
+      - './packages/user/src:/epidraw/packages/user/src'
+  database-user:
+    image: mongo
+    container_name: epidraw-dev-user-db
+    ports:
+      - '27017:27017'
+  auth:
+    build:
+      context: packages/auth
+      dockerfile: Dockerfile.dev
+    container_name: epidraw-dev-auth
+    depends_on:
+      - database-auth
+      - user
+    links:
+      - database-auth
+      - user
+    ports:
+      - '8081:8081'
+    volumes:
+      - './packages/auth/src:/epidraw/packages/auth/src'
+  database-auth:
+    image: mongo
+    container_name: epidraw-dev-auth-db
+    ports:
+      - '27018:27017'
