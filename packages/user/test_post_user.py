@@ -83,8 +83,8 @@ def test_user_succeed():
     assert response.status_code == 201
     assert json_response.get('email') == data.get('email')
     assert json_response.get('username') == data.get('username')
+    assert json_response.get('password')is not None
     assert json_response.get('id') is not None
-    assert json_response.get('password')is None
 
 
 def test_user_email_already_exists():

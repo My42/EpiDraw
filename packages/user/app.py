@@ -53,18 +53,17 @@ def create_user_route():
 
     user = {
         'email': data.get('email'),
-        'password': bcrypt.hashpw(data.get('password').encode('utf-8'), bcrypt.gensalt()),
+        'password': str(bcrypt.hashpw(data.get('password').encode('utf-8'), bcrypt.gensalt())),
         'username': data.get('username'),
         'createdAt': int(time.time())
     }
 
     doc = db.users.insert_one(user)
+    user.pop('_id')
 
     return {
-               'id': str(doc.inserted_id),
-               'email': user.get('email'),
-               'username': user.get('username'),
-               'createdAt': user.get('createdAt')
+               **user,
+               'id': str(doc.inserted_id)
            }, 201
 
 
