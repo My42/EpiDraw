@@ -6,6 +6,7 @@ COPY . .
 
 ENV FLASK_ENV=development
 ENV FLASK_APP=app.py
+ENV DATABASE_HOST=database
 
 RUN pip install -r requirements.txt
 

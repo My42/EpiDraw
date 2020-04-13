@@ -1,5 +1,6 @@
 import bcrypt
 import time
+import os
 
 from flask import Flask
 from pymongo import MongoClient
@@ -7,9 +8,11 @@ from bson.objectid import ObjectId
 from flask import request
 from jsonschema import validate, ValidationError
 from src.user_schema import schema
+from src.get_public_user_field import get_public_user_field
+from flask import jsonify
 
 try:
-    client = MongoClient('database', 27017)
+    client = MongoClient(os.environ['DATABASE_HOST'], 27017)
     db = client.epidraw_user
 except:
     raise Exception('Not able to connect to the database')
@@ -34,7 +37,7 @@ create_user_schema = {
 }
 
 
-@app.route('/user', methods=['POST'])
+@app.route('/users', methods=['POST'])
 def create_user_route():
     if not request.is_json:
         return 'Bad request: Body must be formatted as a json', 400
@@ -65,21 +68,22 @@ def create_user_route():
            }, 201
 
 
-@app.route('/user/<string:user_id>', methods=['GET'])
+@app.route('/users', defaults={'user_id': None})
+@app.route('/users/<string:user_id>', methods=['GET'])
 def get_user_route(user_id: str):
-    user = db.users.find_one({'_id': ObjectId(user_id)})
+    if user_id:
+        user = db.users.find_one({'_id': ObjectId(user_id)})
 
-    print('user =', user, flush=True)
+        if not user:
+            return {}
 
-    if not user:
-        return {}
+        return get_public_user_field(user)
+    else:
+        args = request.args.to_dict(flat=True)
+        users_cursor = db.users.find(args)
+        users = []
 
-    object_id = user.pop('_id')
-    user.pop('password')
+        for user in users_cursor:
+            users.append(get_public_user_field(user))
 
-    print('user =', user, flush=True)
-
-    return {
-        'id': str(object_id),
-        **user
-    }
+        return jsonify(users)

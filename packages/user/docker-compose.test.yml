@@ -8,9 +8,9 @@ services:
       dockerfile: Dockerfile.test
     container_name: 'epidraw-user-test'
     depends_on:
-      - database
+      - database-test
     links:
-      - database
+      - database-test
     ports:
       - '5000:5000'
     volumes:
@@ -18,7 +18,7 @@ services:
       - ./src:/epidraw/packages/user/src
       - ./test_post_user.py:/epidraw/packages/user/test_post_user.py
 
-  database:
+  database-test:
     image: mongo
     container_name: 'epidraw-user-db-test'
     ports:
