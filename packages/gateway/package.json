@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon -L --config ./nodemon.json",
+    "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node -r tsconfig-paths/register src/app.ts"
   },
   "dependencies": {
@@ -17,6 +18,11 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "@typescript-eslint/parser": "^2.28.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "nodemon": "^2.0.2",
     "ts-node": "^8.5.4",
     "tsconfig-paths": "^3.9.0",

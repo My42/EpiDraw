@@ -1,1 +1,1 @@
-export { default as AuthSchema } from './auth'
+export { default as AuthSchema } from './auth';

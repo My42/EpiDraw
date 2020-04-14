@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server'
+import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   type Query {
@@ -8,6 +8,6 @@ const typeDefs = gql`
   type Mutation {
       signUp: Boolean
   }
-`
+`;
 
-export default typeDefs
+export default typeDefs;

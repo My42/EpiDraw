@@ -1,22 +1,22 @@
-import { makeExecutableSchema } from 'apollo-server'
-import typeDefs from './typedefs'
-import { me } from './queries'
-import { signUp } from './mutations'
+import { makeExecutableSchema } from 'apollo-server';
+import typeDefs from './typedefs';
+import { me } from './queries';
+import { signUp } from './mutations';
 
 const resolvers = {
   Query: {
-    me
+    me,
   },
   Mutation: {
-    signUp
-  }
-}
+    signUp,
+  },
+};
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers
-})
+  resolvers,
+});
 
-export { typeDefs, resolvers }
+export { typeDefs, resolvers };
 
-export default schema
+export default schema;
