@@ -49,7 +49,7 @@ create_user_schema = {
 def create_user_route():
     if not request.is_json:
         return 'Bad request: Body must be formatted as a json', 400
-    data = request.get_json();
+    data = request.get_json()
 
     try:
         validate(instance=data, schema=create_user_schema)
