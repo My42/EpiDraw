@@ -7,6 +7,7 @@ import { AuthSchema } from './schemas';
 
 const server = new ApolloServer({
   context: createContext,
+  debug: process.env.NODE_ENV !== 'production',
   playground: true,
   schema: mergeSchemas({ schemas: [AuthSchema] }),
 });

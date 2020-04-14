@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "module": "commonjs",
     "target": "es2017",
     "sourceMap": true,
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
+      "@gateway/*": ["./src/*"]
     },
     "strictNullChecks": true
   }

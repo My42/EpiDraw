@@ -5,8 +5,14 @@ const typeDefs = gql`
       me: String
   }
   
+  input SignUpInput {
+      email: String
+      password: String
+      username: String
+  }
+  
   type Mutation {
-      signUp: Boolean
+      signUp(input: SignUpInput): Boolean
   }
 `;
 

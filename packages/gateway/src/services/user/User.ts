@@ -1,5 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 
+import { User as UserType } from '@gateway/types/User';
+import { handleError } from '@gateway/utils/decorators';
+
+/**
+ * This class calls the user service
+ */
 class User {
   readonly #baseUrl: string
 
@@ -8,8 +14,6 @@ class User {
   readonly #api: AxiosInstance
 
   constructor(baseUrl: string, port: number) {
-    console.log('#construtor =', { baseUrl, port });
-
     this.#baseUrl = baseUrl;
     this.#port = port;
     this.#api = axios.create({
@@ -21,19 +25,22 @@ class User {
   }
 
   /**
+   * Create one user with required information
    *
+   * @param email {string}
+   * @param password {string}
+   * @param username {string}
+   * @memberOf User
    */
-  async search() {
-    try {
-      const response = await this.#api.get('/users');
+  @handleError
+  async createOne({
+    email,
+    password,
+    username,
+  }: Pick<UserType, 'email' | 'password' | 'username'>) {
+    const response = await this.#api.post<UserType>('/users', { email, password, username });
 
-      console.log('response =', response);
-
-      return response.data;
-    } catch (e) {
-      console.log('error =', e);
-      return null;
-    }
+    return response.data;
   }
 }
 

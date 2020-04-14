@@ -12,6 +12,7 @@
     "apollo-server": "^2.9.15",
     "axios": "^0.19.2",
     "chai": "^4.2.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "lodash": "^4.17.15",
     "mocha": "^7.0.0",
     "sinon": "^8.0.2"
