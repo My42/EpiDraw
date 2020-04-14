@@ -9,15 +9,17 @@
   },
   "dependencies": {
     "apollo-server": "^2.9.15",
+    "axios": "^0.19.2",
     "chai": "^4.2.0",
     "lodash": "^4.17.15",
     "mocha": "^7.0.0",
     "sinon": "^8.0.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "nodemon": "^2.0.2",
     "ts-node": "^8.5.4",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.8.3"
   }
 }

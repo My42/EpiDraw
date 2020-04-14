@@ -1,0 +1,14 @@
+FROM node:12.13.1
+
+WORKDIR /epidraw/packages/gateway
+COPY ./ .
+
+RUN npm update
+RUN npm install
+
+ENV APP_ENV dev
+
+CMD ["npm", "run", "dev"]
+
+EXPOSE 8081
+

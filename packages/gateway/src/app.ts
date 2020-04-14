@@ -2,20 +2,15 @@ import {
   ApolloServer,
   mergeSchemas
 } from 'apollo-server'
-import { connect } from 'mongoose'
-// import { createContext } from '../utils'
+import { createContext } from './utils'
 import { AuthSchema } from './schemas'
 
-connect('mongodb://database:27017/EpiDraw',
-  { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(async () => {
-    const server = new ApolloServer({
-      // context: createContext,
-      playground: true,
-      schema: mergeSchemas({ schemas: [AuthSchema] })
-    })
-    server.listen(8081)
-      .then(({ url }) => console.log(`🚀 Gateway service ready at ${url}`))
-      .catch(err => console.log(err))
-  })
-  .catch(error => console.log(error))
+const server = new ApolloServer({
+  context: createContext,
+  playground: true,
+  schema: mergeSchemas({ schemas: [AuthSchema] }),
+})
+
+server.listen(4242)
+  .then(({ url }) => console.log(`🚀 Gateway service ready at ${url}`))
+  .catch(err => console.log(err))

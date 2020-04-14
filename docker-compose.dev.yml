@@ -1,10 +1,58 @@
 version: '3'
 services:
+  auth:
+    build:
+      context: packages/auth
+      dockerfile: Dockerfile.dev
+    container_name: epidraw-dev-auth
+    depends_on:
+      - database-auth
+      - gateway
+    links:
+      - database-auth
+    ports:
+      - '8081:8081'
+    volumes:
+      - './packages/auth/src:/epidraw/packages/auth/src'
+
+  database-auth:
+    image: mongo
+    container_name: epidraw-dev-auth-db
+    ports:
+      - '27018:27017'
+
+  gateway:
+    build:
+      context: packages/gateway
+      dockerfile: Dockerfile.dev
+    container_name: epidraw-dev-gateway
+    environment:
+      - SERVICE_USER_BASE_URL=user
+      - SERVICE_USER_PORT=5000
+    depends_on:
+      - database-gateway
+    links:
+      - database-gateway
+    ports:
+    - '4242:4242'
+    - '80:80'
+    volumes:
+      - './packages/gateway/src:/epidraw/packages/gateway/src'
+
+  database-gateway:
+    image: mongo
+    container_name: epidraw-dev-gateway-db
+    ports:
+      - '27019:27017'
+
+
   user:
     build:
       context: packages/user
       dockerfile: Dockerfile.dev
     container_name: epidraw-dev-user
+    environment:
+      - DATABASE_HOST=database-user
     depends_on:
       - database-user
     links:
@@ -19,23 +67,3 @@ services:
     container_name: epidraw-dev-user-db
     ports:
       - '27017:27017'
-  auth:
-    build:
-      context: packages/auth
-      dockerfile: Dockerfile.dev
-    container_name: epidraw-dev-auth
-    depends_on:
-      - database-auth
-      - user
-    links:
-      - database-auth
-      - user
-    ports:
-      - '8081:8081'
-    volumes:
-      - './packages/auth/src:/epidraw/packages/auth/src'
-  database-auth:
-    image: mongo
-    container_name: epidraw-dev-auth-db
-    ports:
-      - '27018:27017'
