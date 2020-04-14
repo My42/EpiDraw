@@ -4,7 +4,7 @@ import {
 } from 'apollo-server'
 import { connect } from 'mongoose'
 // import { createContext } from '../utils'
-import { AuthSchema } from './service/schemas'
+import { AuthSchema } from './schemas'
 
 connect('mongodb://database:27017/EpiDraw',
   { useNewUrlParser: true, useUnifiedTopology: true })
