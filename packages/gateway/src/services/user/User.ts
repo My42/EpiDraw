@@ -24,6 +24,10 @@ class User {
     });
   }
 
+  get api() {
+    return this.#api;
+  }
+
   /**
    * Create one user with required information
    *

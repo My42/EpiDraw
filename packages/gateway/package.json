@@ -7,11 +7,12 @@
     "dev": "nodemon -L --config ./nodemon.json",
     "lint": "eslint ./src/**/* --ext .ts",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
-    "test": "ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
+    "test": "export APP_ENV=TEST && ts-mocha --paths -p ./tsconfig.json 'src/**/*.spec.ts'"
   },
   "dependencies": {
     "apollo-server": "^2.9.15",
     "axios": "^0.19.2",
+    "axios-mock-adapter": "^1.18.1",
     "chai": "^4.2.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "faker": "^4.1.0",
@@ -21,8 +22,10 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/axios-mock-adapter": "^1.10.0",
     "@types/chai": "^4.2.11",
     "@types/faker": "^4.1.11",
+    "@types/mocha": "^7.0.2",
     "@types/sinon": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",

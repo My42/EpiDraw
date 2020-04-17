@@ -9,7 +9,9 @@ export function handleError(target, key, descriptor) {
     try {
       return await fn.call(this, ...args);
     } catch (e) {
-      console.log(`Error caught from ${target}.${key}:`, e);
+      if (process.env.APP_ENV !== 'TEST') {
+        console.log(`Error caught from ${target}.${key}:`, e);
+      }
       if (e.isAxiosError) {
         const error = e as AxiosError;
         throw new ApolloError(error.response?.data, error.response?.status.toString(), {});
