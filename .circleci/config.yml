@@ -15,6 +15,16 @@ jobs:
       - run: npm run auth.update
       - run: npm run auth.ci
       - run: npm run auth.test
+  gateway:
+    docker:
+      - image: circleci/node:12.13.1
+    steps:
+      - checkout # this pulls pulls code down from GitHub
+      - run: npm update
+      - run: npm install
+      - run: npm run gateway.update
+      - run: npm run gateway.ci
+      - run: npm run gateway.test
   user:
     docker:
       - image: circleci/python:latest
@@ -34,5 +44,6 @@ workflows:
   version: 2
   microservies: # this is the name of our workflow
     jobs: # and here we list the jobs we are going to run.
+      - gateway
       - auth
       - user
