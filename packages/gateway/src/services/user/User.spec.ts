@@ -3,6 +3,7 @@ import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import MockAdapter from 'axios-mock-adapter';
 
+import { objToHttpParams } from '@gateway/utils/objToHttpParams';
 import { User } from './User';
 
 describe('gateway/src/services/user/User', () => {
@@ -36,6 +37,19 @@ describe('gateway/src/services/user/User', () => {
       const apolloError: ApolloError = error;
       expect(apolloError.message).to.be.equal('message');
       expect(apolloError.extensions.code).to.be.a('string').equal('404');
+    });
+  });
+
+  describe('User.find', async () => {
+    it('should find users', async () => {
+      const filters = { email: 'fake_email' };
+      const data = [1, 2, 3, 4];
+
+      axiosMocked.onGet(`/users?${objToHttpParams(filters)}`).reply(200, data);
+
+      const result = await userService.find(filters);
+
+      expect(result).to.be.deep.equal(data);
     });
   });
 });

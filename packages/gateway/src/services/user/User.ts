@@ -1,7 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+import isEmpty from 'lodash/isEmpty';
 
 import { User as UserType } from '@gateway/types/User';
 import { handleError } from '@gateway/utils/decorators';
+import { objToHttpParams } from '@gateway/utils/objToHttpParams';
 
 /**
  * This class calls the user service
@@ -43,6 +45,20 @@ class User {
     username,
   }: Pick<UserType, 'email' | 'password' | 'username'>) {
     const response = await this.#api.post<UserType>('/users', { email, password, username });
+
+    return response.data;
+  }
+
+  /**
+   * Find users by their fields
+   *
+   * @param fields {UserType}
+   * @memberOf User
+   */
+  @handleError
+  async find(fields: Partial<UserType>) {
+    const url = isEmpty(fields) ? '/users' : `/users?${objToHttpParams(fields)}`;
+    const response = await this.#api.get(url);
 
     return response.data;
   }
