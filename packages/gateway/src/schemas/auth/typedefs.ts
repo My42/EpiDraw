@@ -8,18 +8,18 @@ const typeDefs = gql`
   
   type User {
       id: ID!
-      email: String!
+      email: Email!
       username: String!
   }
   
   input SignUpInput {
-      email: String!
+      email: Email!
       password: Password!
       username: String!
   }
 
   input SignInInput {
-      email: String!
+      email: Email!
       password: Password!
   }
 

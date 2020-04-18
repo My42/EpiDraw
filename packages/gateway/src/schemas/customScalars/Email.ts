@@ -1,7 +1,6 @@
-import { UserInputError } from 'apollo-server';
+import { Kind } from 'graphql/language';
 import { GraphQLScalarType } from 'graphql';
-
-const description = 'Basic email';
+import { UserInputError } from 'apollo-server';
 
 function emailValue(value: string) {
   const found = value.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/);
@@ -11,22 +10,21 @@ function emailValue(value: string) {
     throw new UserInputError('Invalid email');
   }
 
-  console.log({ found, value, result });
-
-  return result;
+  return value;
 }
 
 export const Email = new GraphQLScalarType({
   name: 'Email',
-  description,
-  serialize(value) {
-    return value;
-  },
+  description: 'Basic Email',
   parseValue(value) {
-    return value;
+    if (typeof value === 'string') throw new UserInputError('Must be a String');
+    return emailValue(value);
+  },
+  serialize() {
+    return null;
   },
   parseLiteral(ast) {
-    if (ast.kind === 'StringValue') {
+    if (ast.kind === Kind.STRING) {
       return emailValue(ast.value);
     }
     throw new UserInputError('Must be a String');
