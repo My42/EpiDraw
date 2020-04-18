@@ -1,5 +1,6 @@
-import { UserInputError } from 'apollo-server';
+import { Kind } from 'graphql/language';
 import { GraphQLScalarType } from 'graphql';
+import { UserInputError } from 'apollo-server';
 
 const description = '8 characters with at least one number and special one';
 
@@ -8,23 +9,26 @@ function passwordValue(value: string) {
   const result = found ? value : null;
 
   if (result === null) {
-    throw new UserInputError(`Invalid password: ${description}`);
+    throw new UserInputError(`${description}`);
   }
 
-  console.log({ found, value, result });
-
-  return result;
+  return value;
 }
 
 export const Password = new GraphQLScalarType({
   name: 'Password',
   description,
-  serialize: passwordValue,
-  parseValue: passwordValue,
+  parseValue(value) {
+    if (typeof value === 'string') throw new UserInputError('Must be a String');
+    return passwordValue(value);
+  },
+  serialize() {
+    return null;
+  },
   parseLiteral(ast) {
-    if (ast.kind === 'StringValue') {
+    if (ast.kind === Kind.STRING) {
       return passwordValue(ast.value);
     }
-    throw new UserInputError('Invalid password: Must be a String');
+    throw new UserInputError('Must be a String');
   },
 });

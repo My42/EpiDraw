@@ -1,4 +1,4 @@
-import { makeExecutableSchema } from 'graphql-tools';
+import { makeExecutableSchema } from 'apollo-server';
 import Auth from './auth';
 import CustomScalar from './customScalars';
 
