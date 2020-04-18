@@ -10,7 +10,7 @@ export function handleError(target, key, descriptor) {
       return await fn.call(this, ...args);
     } catch (e) {
       if (process.env.APP_ENV !== 'TEST') {
-        console.log(`Error caught from ${target}.${key}:`, e);
+        console.log(`Error caught from ${target}.${key}:`, e.toString());
       }
       if (e.isAxiosError) {
         const error = e as AxiosError;
