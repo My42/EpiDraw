@@ -25,6 +25,6 @@ export const Password = new GraphQLScalarType({
     if (ast.kind === 'StringValue') {
       return passwordValue(ast.value);
     }
-    return null;
+    throw new UserInputError('Invalid password: Must be a String');
   },
 });
