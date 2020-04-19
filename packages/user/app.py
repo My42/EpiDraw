@@ -61,7 +61,7 @@ def create_user_route():
 
     user = {
         'email': data.get('email'),
-        'password': str(bcrypt.hashpw(data.get('password').encode('utf-8'), bcrypt.gensalt())),
+        'password': str(bcrypt.hashpw(data.get('password').encode('utf-8'), bcrypt.gensalt()).decode('utf-8')),
         'username': data.get('username'),
         'createdAt': int(time.time())
     }
