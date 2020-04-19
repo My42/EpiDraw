@@ -50,12 +50,12 @@ export class Auth {
     return pick(newUser, ['_id', 'email', 'username'])
   }
 
-  async getToken ({ userId }: SignInArgs): Promise<string> {
+  getToken ({ userId }: SignInArgs) {
     return jwt.sign(
       { sub: userId },
       this.#jwtPrivateKey,
       { expiresIn: '1d' }
-    ) as string
+    )
   }
 
   verify ({ token }: { token: string }): JwtToken | null {

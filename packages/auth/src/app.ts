@@ -1,14 +1,13 @@
 import { connect } from 'mongoose'
 import bodyParser from 'body-parser'
 import express from 'express'
-import jwt from 'jsonwebtoken'
 import 'express-async-errors'
 
 import { Users as UsersInterface } from '@auth/models'
 import { Auth } from '@auth/service'
 import { EpiDrawError } from '@auth/errors'
 
-connect('mongodb://database:27017/EpiDraw',
+connect(`mongodb://${process.env.DATABASE_HOST}:27017/EpiDraw`,
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
     const service = new Auth(new UsersInterface())

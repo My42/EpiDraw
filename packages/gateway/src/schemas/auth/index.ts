@@ -1,10 +1,11 @@
-import { me } from './queries';
+import { me, signIn } from './queries';
 import { signUp } from './mutations';
 import typeDefs from './typedefs';
 
 const resolvers = {
   Query: {
     me,
+    signIn,
   },
   Mutation: {
     signUp,

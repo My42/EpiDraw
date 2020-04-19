@@ -1,7 +1,9 @@
 import { User } from '../services/user';
+import { Auth } from '../services/auth';
 
 export interface ApolloContext {
   services: {
-    user: User
+    auth: Auth;
+    user: User;
   }
 }

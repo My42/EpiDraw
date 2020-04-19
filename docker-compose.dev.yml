@@ -5,6 +5,8 @@ services:
       context: packages/auth
       dockerfile: Dockerfile.dev
     container_name: epidraw-dev-auth
+    environment:
+      - DATABASE_HOST=database-auth
     depends_on:
       - database-auth
       - gateway
@@ -27,6 +29,8 @@ services:
       dockerfile: Dockerfile.dev
     container_name: epidraw-dev-gateway
     environment:
+      - SERVICE_AUTH_BASE_URL=auth
+      - SERVICE_AUTH_PORT=8081
       - SERVICE_USER_BASE_URL=user
       - SERVICE_USER_PORT=5000
     depends_on:

@@ -2,8 +2,8 @@ import { gql } from 'apollo-server';
 
 const typeDefs = gql`
   type SignInOutput {
-      token: String
-      me: User
+      token: String!
+      me: User!
   }
   
   type User {
