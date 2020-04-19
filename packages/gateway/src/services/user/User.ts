@@ -1,35 +1,15 @@
-import axios, { AxiosInstance } from 'axios';
 import isEmpty from 'lodash/isEmpty';
 
 import { User as UserType } from '@gateway/types/User';
 import { handleError } from '@gateway/utils/decorators';
 import { objToHttpParams } from '@gateway/utils/objToHttpParams';
 
+import { Service } from '../utils/Service';
+
 /**
  * This class calls the user service
  */
-class User {
-  readonly #baseUrl: string
-
-  readonly #port: number
-
-  readonly #api: AxiosInstance
-
-  constructor(baseUrl: string, port: number) {
-    this.#baseUrl = baseUrl;
-    this.#port = port;
-    this.#api = axios.create({
-      baseURL: `http://${baseUrl}:${port}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-
-  get api() {
-    return this.#api;
-  }
-
+class User extends Service {
   /**
    * Create one user with required information
    *
@@ -44,7 +24,7 @@ class User {
     password,
     username,
   }: Pick<UserType, 'email' | 'password' | 'username'>) {
-    const response = await this.#api.post<UserType>('/users', { email, password, username });
+    const response = await this.api.post<UserType>('/users', { email, password, username });
 
     return response.data;
   }
@@ -58,7 +38,7 @@ class User {
   @handleError
   async find(fields: Partial<UserType>) {
     const url = isEmpty(fields) ? '/users' : `/users?${objToHttpParams(fields)}`;
-    const response = await this.#api.get(url);
+    const response = await this.api.get<UserType[]>(url);
 
     return response.data;
   }

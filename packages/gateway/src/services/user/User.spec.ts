@@ -8,7 +8,7 @@ import { User } from './User';
 
 describe('gateway/src/services/user/User', () => {
   const userService = new User('user', 4242);
-  const axiosMocked = new MockAdapter(userService.api);
+  const axiosMocked = new MockAdapter(userService.getApi);
 
   describe('User.createOne', () => {
     it('should create one', async () => {
