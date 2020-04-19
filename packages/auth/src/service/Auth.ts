@@ -17,8 +17,7 @@ interface SignUpArgs {
 }
 
 interface SignInArgs {
-  email: string;
-  password: string;
+  userId: string;
 }
 
 interface JwtToken {
@@ -51,13 +50,9 @@ export class Auth {
     return pick(newUser, ['_id', 'email', 'username'])
   }
 
-  async signIn ({ email = '', password = '' }: SignInArgs): Promise<string> {
-    const user = await this.#usersInterface.findOne({ email, password })
-
-    if (!user) throw new EpiDrawError(errors.USER_UNKNOWN, 'user.error.unknown')
-
+  async getToken ({ userId }: SignInArgs): Promise<string> {
     return jwt.sign(
-      { sub: user._id.toString() },
+      { sub: userId },
       this.#jwtPrivateKey,
       { expiresIn: '1d' }
     ) as string

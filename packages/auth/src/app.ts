@@ -1,6 +1,7 @@
 import { connect } from 'mongoose'
 import bodyParser from 'body-parser'
 import express from 'express'
+import jwt from 'jsonwebtoken'
 import 'express-async-errors'
 
 import { Users as UsersInterface } from '@auth/models'
@@ -16,18 +17,12 @@ connect('mongodb://database:27017/EpiDraw',
 
     app.use(bodyParser.json())
 
-    app.post('/signUp', async (req, res) => {
-      const { email, username, password } = req.body || { }
+    app.get('/token', async (req, res) => {
+      const { userId } = req.query
 
-      const result = await service.signUp({ email, username, password })
-      return res.json(result)
-    })
+      if (!userId) return res.status(400)
 
-    app.post('/signIn', async (req, res) => {
-      const { email, password } = req.body || { }
-      const token = await service.signIn({ email, password })
-
-      return res.json({ token })
+      return res.send(service.getToken({ userId }))
     })
 
     app.get('/verify', async (req, res) => {
