@@ -20,8 +20,8 @@ export const Email = new GraphQLScalarType({
     if (typeof value === 'string') throw new UserInputError('Must be a String');
     return emailValue(value);
   },
-  serialize() {
-    return null;
+  serialize(value) {
+    return value;
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.STRING) {
