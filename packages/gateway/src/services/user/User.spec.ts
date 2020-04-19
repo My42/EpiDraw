@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import MockAdapter from 'axios-mock-adapter';
 
 import { objToHttpParams } from '@gateway/utils/objToHttpParams';
+
 import { User } from './User';
 
 describe('gateway/src/services/user/User', () => {
