@@ -4,17 +4,20 @@ import { expect } from 'chai';
 import MockAdapter from 'axios-mock-adapter';
 
 import { objToHttpParams } from '@gateway/utils/objToHttpParams';
+import { createUserFixture } from '@gateway/utils/tests/fixtures';
+
 
 import { User } from './User';
 
 describe('gateway/src/services/user/User', () => {
   const userService = new User('user', 4242);
   const axiosMocked = new MockAdapter(userService.getApi);
+  const { email, username, password } = createUserFixture();
 
   describe('User.createOne', () => {
     it('should create one', async () => {
       const data = { hello: 'world' };
-      const body = { email: 'vincent.mesquita@epitech.eu', username: 'ZeetcH', password: 'coucou0%' };
+      const body = { email, username, password };
       axiosMocked.onPost('/users').reply(200, data);
 
       const result = await userService.createOne(body);
@@ -28,7 +31,7 @@ describe('gateway/src/services/user/User', () => {
       axiosMocked.onPost('/users').reply(404, 'message');
 
       try {
-        await userService.createOne({ email: 'vincent.mesquita@epitech.eu', password: 'coucou0%', username: 'ZeetcH' });
+        await userService.createOne({ email, password, username });
       } catch (e) {
         error = e;
       }
