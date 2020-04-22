@@ -31,6 +31,11 @@
             "ObjectPattern": { "multiline": true },
             "ImportDeclaration": { "multiline": true },
             "ExportDeclaration": { "multiline": true }
+        }],
+        "@typescript-eslint/no-unused-vars": ["error", {
+            "vars": "all",
+            "args": "after-used",
+            "ignoreRestSiblings": false
         }]
     }
 }
