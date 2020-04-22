@@ -25,6 +25,12 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }]
+        "react/jsx-filename-extension": [2, { "extensions": [".tsx"] }],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": { "multiline": true },
+            "ObjectPattern": { "multiline": true },
+            "ImportDeclaration": { "multiline": true },
+            "ExportDeclaration": { "multiline": true }
+        }]
     }
 }
