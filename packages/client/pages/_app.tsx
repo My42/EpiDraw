@@ -2,10 +2,22 @@ import * as React from 'react';
 import { AppProps } from 'next/app';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { blue, deepPurple } from '@material-ui/core/colors';
 
-const theme = createMuiTheme();
-
-console.log('createTheme =', theme);
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: deepPurple,
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+        borderRadius: '30px',
+      },
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
